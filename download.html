@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KeepJoy: Home Declutter — Download</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sohne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f5f9fc;
+      --fg: #0f1419;
+      --muted: #5a6b7a;
+      --card: #ffffff;
+      --border: #d9e5ed;
+      --accent-cyan: #1fd9d1;
+      --accent-purple: #9370db;
+      --accent: linear-gradient(135deg, #1fd9d1, #9370db);
+      --shadow: 0 18px 48px rgba(17, 24, 39, 0.12);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Sohne", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 18% 20%, rgba(31, 217, 209, 0.12), transparent 36%),
+                  radial-gradient(circle at 82% 8%, rgba(147, 112, 219, 0.16), transparent 40%),
+                  var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+      padding: clamp(18px, 4vw, 32px);
+    }
+    .page { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      gap: 16px;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--fg); }
+    .brand img { width: 44px; height: 44px; border-radius: 12px; box-shadow: 0 8px 24px rgba(17, 24, 39, 0.12); }
+    .brand strong { font-size: 18px; letter-spacing: -0.3px; }
+    .lang-toggle {
+      display: inline-flex;
+      padding: 4px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      gap: 4px;
+      box-shadow: 0 10px 30px rgba(17, 24, 39, 0.08);
+    }
+    .lang-btn {
+      border: none;
+      background: transparent;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .lang-btn.active { background: var(--accent); color: #fff; box-shadow: 0 10px 28px rgba(147, 112, 219, 0.3); }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: clamp(24px, 6vw, 40px);
+      align-items: center;
+    }
+    .hero h1 {
+      font-size: clamp(34px, 6vw, 52px);
+      letter-spacing: -0.8px;
+      margin: 0 0 10px 0;
+    }
+    .hero p { margin: 0; color: var(--muted); font-size: clamp(16px, 2vw, 18px); line-height: 1.7; }
+    .cta-row { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
+    .cta {
+      border: none;
+      border-radius: 14px;
+      padding: 12px 16px;
+      min-width: 200px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      color: #fff;
+      background: var(--accent);
+      box-shadow: 0 12px 34px rgba(31, 217, 209, 0.22);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      font-family: inherit;
+      text-decoration: none;
+    }
+    .cta:hover { transform: translateY(-1px); opacity: 0.95; }
+    .cta.secondary {
+      background: rgba(31, 217, 209, 0.12);
+      color: #0f1419;
+      border: 1px solid rgba(31, 217, 209, 0.4);
+      box-shadow: none;
+    }
+    .note { color: var(--muted); font-size: 14px; margin-top: 6px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 34px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 20px;
+      border: 1px solid rgba(217, 229, 237, 0.8);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 85% 10%, rgba(147, 112, 219, 0.12), transparent 40%);
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      background: rgba(31, 217, 209, 0.12);
+      color: #0f1419;
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    .card h3 { margin: 0 0 6px; font-size: 20px; }
+    .card p { margin: 0; color: var(--muted); line-height: 1.6; }
+    .platform {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    .pill {
+      background: rgba(15, 20, 25, 0.04);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-weight: 600;
+      color: #0f1419;
+      font-size: 13px;
+    }
+    .pill.outline { border: 1px dashed var(--border); background: transparent; }
+    .muted-small { font-size: 13px; color: var(--muted); }
+    .footer-links { margin-top: 26px; font-size: 14px; color: var(--muted); }
+    .footer-links a { color: #2a6eea; text-decoration: none; }
+    .footer-links a:hover { text-decoration: underline; }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .top { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 540px) {
+      body { padding: 16px; }
+      .lang-toggle { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="top">
+      <a class="brand" href="index.html">
+        <img src="logo.svg" alt="KeepJoy: Home Declutter logo" />
+        <strong>KeepJoy</strong>
+      </a>
+      <div class="lang-toggle" aria-label="Switch language">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中文</button>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div>
+        <p class="badge" data-copy="eyebrow">Cross-platform</p>
+        <h1 data-copy="title">Download KeepJoy</h1>
+        <p data-copy="subtitle">Organize, declutter, and keep memories across all your devices. Choose your platform below.</p>
+        <div class="cta-row">
+          <a class="cta" id="iosCta" href="mailto:contact.keepjoy@gmail.com?subject=KeepJoy%20TestFlight" data-copy="iosCta">Request iOS TestFlight</a>
+          <a class="cta secondary" id="androidCta" href="mailto:contact.keepjoy@gmail.com?subject=KeepJoy%20Android%20Beta" data-copy="androidCta">Request Android beta</a>
+        </div>
+        <div class="note" data-copy="note">App Store / Google Play 仍在上架流程。点击上方按钮可直接邮件申请 TestFlight 或 Android Beta 下载。</div>
+      </div>
+      <div class="card">
+        <div class="badge">✨ <span data-copy="cardTitle">What to expect</span></div>
+        <div class="grid" style="margin-top:10px">
+          <div>
+            <h3 data-copy="feature1Title">Fast capture</h3>
+            <p data-copy="feature1">Scan items, add tags, and log memories in seconds with auto-suggestions.</p>
+          </div>
+          <div>
+            <h3 data-copy="feature2Title">Smart reminders</h3>
+            <p data-copy="feature2">Get nudges to tidy, donate, or revisit keepsakes at the right moment.</p>
+          </div>
+          <div>
+            <h3 data-copy="feature3Title">Sync ready</h3>
+            <p data-copy="feature3">Your decluttering progress stays consistent across devices when you sign in.</p>
+          </div>
+        </div>
+        <div class="platform">
+          <div class="pill outline" data-copy="iosLabel">iOS · App Store (coming soon)</div>
+          <div class="pill outline" data-copy="androidLabel">Android · Google Play (coming soon)</div>
+          <div class="muted-small" data-copy="betaNote">Not published yet — ask us for beta builds.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:38px">
+      <div class="card">
+        <div class="badge">📱</div>
+        <h3 data-copy="iosBlockTitle">iOS / iPadOS</h3>
+        <p data-copy="iosBlockCopy">We are preparing the App Store listing. Once live, you can download directly. If you want to test earlier, we can provide a TestFlight invite.</p>
+        <div class="platform">
+          <div class="pill" data-copy="statusComing">Coming soon</div>
+          <a class="cta secondary" href="mailto:contact.keepjoy@gmail.com?subject=KeepJoy%20TestFlight" data-copy="getInvite">Request TestFlight invite</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="badge">🤖</div>
+        <h3 data-copy="androidBlockTitle">Android</h3>
+        <p data-copy="androidBlockCopy">Google Play listing is in progress. For now, you can request a closed beta build to try KeepJoy on Android.</p>
+        <div class="platform">
+          <div class="pill" data-copy="statusComing">Coming soon</div>
+          <a class="cta secondary" href="mailto:contact.keepjoy@gmail.com?subject=KeepJoy%20Android%20Beta" data-copy="getBeta">Request Android beta</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-links">
+      <a href="index.html" data-copy="backHome">← Back to home</a> ·
+      <a href="contact.html" data-copy="contact">Contact us</a> ·
+      <a href="privacy.html" id="footer-privacy">Privacy</a> ·
+      <a href="terms.html" id="footer-terms">Terms</a>
+    </div>
+  </div>
+
+  <script src="lang-links.js"></script>
+  <script>
+    const copy = {
+      en: {
+        eyebrow: 'Cross-platform',
+        title: 'Download KeepJoy: Home Declutter',
+        subtitle: 'Organize, declutter, and keep memories across all your devices. Choose your platform below.',
+        iosCta: 'Request iOS TestFlight',
+        androidCta: 'Request Android beta',
+        note: 'App Store / Google Play are pending review. Click above to request TestFlight or Android beta download.',
+        cardTitle: 'What to expect',
+        feature1Title: 'Fast capture',
+        feature1: 'Scan items, add tags, and log memories in seconds with auto-suggestions.',
+        feature2Title: 'Smart reminders',
+        feature2: 'Get nudges to tidy, donate, or revisit keepsakes at the right moment.',
+        feature3Title: 'Sync ready',
+        feature3: 'Your decluttering progress stays consistent across devices when you sign in.',
+        iosLabel: 'iOS · App Store (coming soon)',
+        androidLabel: 'Android · Google Play (coming soon)',
+        betaNote: 'Not published yet — ask us for beta builds.',
+        iosBlockTitle: 'iOS / iPadOS',
+        iosBlockCopy: 'We are preparing the App Store listing. Once live, you can download directly. If you want to test earlier, we can provide a TestFlight invite.',
+        androidBlockTitle: 'Android',
+        androidBlockCopy: 'Google Play listing is in progress. For now, you can request a closed beta build to try KeepJoy: Home Declutter on Android.',
+        statusComing: 'Coming soon',
+        getInvite: 'Request TestFlight invite',
+        getBeta: 'Request Android beta',
+        backHome: '← Back to home',
+        contact: 'Contact us',
+      },
+      zh: {
+        eyebrow: '跨平台',
+        title: '下载喜物收纳',
+        subtitle: '在所有设备上整理、留存回忆。选择你的平台开始体验。',
+        iosCta: '申请 iOS TestFlight',
+        androidCta: '申请 Android Beta',
+        note: 'App Store / Google Play 上架中，点击上方按钮直接邮件申请 TestFlight 或 Android Beta 下载。',
+        cardTitle: '你会获得',
+        feature1Title: '快速记录',
+        feature1: '秒级添加物品、标签和回忆，并有智能建议。',
+        feature2Title: '智能提醒',
+        feature2: '在合适的时间提醒你整理、捐赠或回顾物品。',
+        feature3Title: '同步准备',
+        feature3: '登录后可在多设备保持整理进度一致。',
+        iosLabel: 'iOS · App Store（即将上线）',
+        androidLabel: 'Android · Google Play（即将上线）',
+        betaNote: '尚未发布 — 需要测试版请告诉我们。',
+        iosBlockTitle: 'iOS / iPadOS',
+        iosBlockCopy: 'App Store 上架中，上线后可直接下载。如需提前体验，可申请 TestFlight 测试。',
+        androidBlockTitle: 'Android',
+        androidBlockCopy: 'Google Play 上架进行中，想提前体验可申请 Android 封测版。',
+        statusComing: '即将上线',
+        getInvite: '申请 TestFlight 邀请',
+        getBeta: '申请 Android 测试',
+        backHome: '← 返回首页',
+        contact: '联系我们',
+      },
+    };
+
+    let currentLang = localStorage.getItem('language') || 'en';
+    const iosCta = document.getElementById('iosCta');
+    const androidCta = document.getElementById('androidCta');
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('language', lang);
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-copy]').forEach(el => {
+        const key = el.getAttribute('data-copy');
+        const val = copy[lang][key];
+        if (typeof val === 'string') el.textContent = val;
+      });
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+      iosCta.setAttribute('aria-label', copy[lang].iosCta);
+      androidCta.setAttribute('aria-label', copy[lang].androidCta);
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+    });
+
+    applyLanguage(currentLang);
+    if (window.updateLinksForLang) window.updateLinksForLang(currentLang);
+  </script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact KeepJoy: Home Declutter — 联系我们</title>
+  <style>
+    :root{--bg:#fafafa;--card:#fff;--fg:#111;--muted:#667;--accent:#6b5df5;--input-border:#e6eef6}
+    *,*::before,*::after{box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--fg);margin:0;padding:20px}
+    .container{max-width:840px;margin:28px auto;padding:28px;background:var(--card);box-shadow:0 8px 30px rgba(16,24,40,0.06);border-radius:14px}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+    .logo{width:56px;height:56px}
+    h1{margin:0;font-size:22px}
+    p.lead{color:var(--muted);margin-top:6px}
+    form{margin-top:20px;display:grid;gap:14px}
+    label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+    .field{display:flex;flex-direction:column}
+    input[type="text"],input[type="email"],select{width:100%;padding:10px 12px;border:1px solid var(--input-border);border-radius:10px;font-size:15px;background:#fff;min-height:44px;line-height:20px}
+    textarea{width:100%;padding:12px 14px;border:1px solid var(--input-border);border-radius:10px;font-size:15px;background:#fff;min-height:160px;line-height:1.5;resize:vertical}
+    input[type="text"]:focus,input[type="email"]:focus,select:focus,textarea:focus{outline:none;box-shadow:0 6px 20px rgba(99,102,241,0.08);border-color:rgba(99,102,241,0.6)}
+    select{appearance:none;-webkit-appearance:none}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .actions{display:flex;gap:12px;align-items:center;margin-top:6px}
+    .btn-primary{background:var(--accent);color:#fff;padding:10px 16px;border-radius:10px;border:none;font-weight:600;cursor:pointer}
+    .muted-small{font-size:13px;color:var(--muted)}
+    .footer-note{margin-top:16px;font-size:13px;color:var(--muted)}
+    .success{color:green}
+    .error{color:#d64545}
+    @media(max-width:720px){.row{grid-template-columns:1fr}.actions{flex-direction:column;align-items:stretch} .btn-primary{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo"><img src="logo.png" alt="KeepJoy: Home Declutter" style="width:56px;height:56px;object-fit:contain"/></div>
+      <div>
+        <h1 id="form-title">Contact KeepJoy</h1>
+        <p id="form-lead" class="lead">Have feedback or need help? Send us a message and we will get back to you.</p>
+      </div>
+    </header>
+
+    <form id="contactForm" novalidate>
+      <div class="row">
+        <div class="field">
+          <label id="label-name" for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
+        </div>
+        <div class="field">
+          <label id="label-email" for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required />
+        </div>
+      </div>
+
+      <div>
+        <label id="label-category" for="category">Category</label>
+        <select id="category" name="category">
+          <option value="general">General feedback</option>
+          <option value="bug">Bug report</option>
+          <option value="billing">Billing</option>
+          <option value="feature">Feature request</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label id="label-subject" for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" placeholder="Short summary" required />
+        </div>
+        <!-- priority removed per request -->
+        <div style="display:none"></div>
+      </div>
+
+      <div>
+        <label id="label-message" for="message">Message</label>
+        <textarea id="message" name="message" placeholder="How can we help?" required></textarea>
+      </div>
+
+      <div class="actions">
+        <button id="send-button" type="submit" class="btn-primary">Send Message</button>
+        <div class="muted-small" id="privacy-inline">We will reply to the email you provide.</div>
+      </div>
+
+      <div class="footer-note" id="privacy-note">
+        <strong>Privacy:</strong> Your message will be sent to our team. Do not include sensitive personal data.
+      </div>
+
+      <div id="result" aria-live="polite" style="margin-top:10px"></div>
+    </form>
+
+    <!-- language controlled by site-wide selection stored in localStorage -->
+  </div>
+
+  <script>
+    const translations = {
+  en: {
+    title: 'Contact KeepJoy',
+    lead: 'Have feedback or need help? Send us a message and we will get back to you.',
+    name: 'Name',
+    email: 'Email',
+    category: 'Category',
+    subject: 'Subject',
+    message: 'Message',
+    send: 'Send Message',
+    privacy: 'Privacy: Your message will be sent to our team. Do not include sensitive personal data.',
+  },
+  zh: {
+    title: '联系我们',
+    lead: '有反馈或需要帮助？发送消息，我们会尽快回复您。',
+    name: '名字',
+    email: '邮箱',
+    category: '分类',
+    subject: '主题',
+    message: '留言',
+    send: '发送',
+    privacy: '隐私：您的信息将发送至我们的团队，请勿包含敏感信息。',
+  },
+};
+
+// Use site-wide language preference (set on index page)
+let currentLang = localStorage.getItem('language') || 'en';
+
+function updateLanguage() {
+  const t = translations[currentLang];
+  document.getElementById('form-title').textContent = t.title;
+  document.getElementById('form-lead').textContent = t.lead;
+  document.getElementById('label-name').textContent = t.name;
+  document.getElementById('label-email').textContent = t.email;
+  document.getElementById('label-category').textContent = t.category;
+  document.getElementById('label-subject').textContent = t.subject;
+  document.getElementById('label-message').textContent = t.message;
+  document.getElementById('send-button').textContent = t.send;
+
+  // set placeholders and option texts
+  document.getElementById('name').placeholder = currentLang === 'en' ? 'Your name' : '你的名字';
+  document.getElementById('email').placeholder = currentLang === 'en' ? 'you@example.com' : '邮箱地址';
+  document.getElementById('subject').placeholder = currentLang === 'en' ? 'Short summary' : '简短说明';
+  document.getElementById('message').placeholder = currentLang === 'en' ? 'How can we help?' : '请告诉我们如何帮助你';
+
+  // category options
+  const cat = document.getElementById('category');
+  cat.querySelector('option[value="general"]').textContent = currentLang === 'en' ? 'General feedback' : '一般反馈';
+  cat.querySelector('option[value="bug"]').textContent = currentLang === 'en' ? 'Bug report' : '错误报告';
+  cat.querySelector('option[value="billing"]').textContent = currentLang === 'en' ? 'Billing' : '计费';
+  cat.querySelector('option[value="feature"]').textContent = currentLang === 'en' ? 'Feature request' : '功能建议';
+  cat.querySelector('option[value="other"]').textContent = currentLang === 'en' ? 'Other' : '其他';
+
+  // set privacy texts (inline and footer)
+  const inline = document.getElementById('privacy-inline');
+  const footer = document.getElementById('privacy-note');
+  if(inline) inline.textContent = t.privacy;
+  if(footer) footer.textContent = t.privacy;
+}
+
+// React to site-wide language changes (from index page)
+window.addEventListener('storage', (e) => {
+  if (e.key === 'language') {
+    currentLang = e.newValue || 'en';
+    updateLanguage();
+  }
+});
+
+updateLanguage();
+
+// Form submission using Web3Forms (client-side public access key)
+const WEB3FORMS_KEY = '64387987-618f-4174-bb6b-c42ac48964a1';
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
+const form = document.getElementById('contactForm');
+const resultEl = document.getElementById('result');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const name = form.name.value.trim();
+  const email = form.email.value.trim();
+  const subject = form.subject.value.trim();
+  const message = form.message.value.trim();
+  const category = form.category.value;
+
+  if(!name || !email || !subject || !message){
+    resultEl.innerHTML = '<div class="error">' + (currentLang === 'en' ? 'Please complete all required fields.' : '请完整填写所有必填项。') + '</div>';
+    return;
+  }
+
+  // simple email check
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!emailRe.test(email)){
+    resultEl.innerHTML = '<div class="error">' + (currentLang === 'en' ? 'Please provide a valid email address.' : '请输入有效的邮箱地址。') + '</div>';
+    return;
+  }
+
+  // If WEB3FORMS_KEY is set, send via Web3Forms
+  if(WEB3FORMS_KEY && WEB3FORMS_KEY.trim().length > 0){
+    const formData = new FormData();
+    formData.append('access_key', WEB3FORMS_KEY);
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('subject', subject);
+    formData.append('message', message);
+    formData.append('category', category);
+    try{
+      const res = await fetch(WEB3FORMS_ENDPOINT, { method: 'POST', body: formData });
+      let json = {};
+      try{ json = await res.json(); }catch(e){ /* ignore JSON parse errors */ }
+      if(res.ok){
+        resultEl.innerHTML = '<div class="success">' + (currentLang === 'en' ? 'Thank you! Your message has been sent.' : '感谢！您的信息已发送。') + '</div>';
+        form.reset();
+      } else {
+        const msg = (json && json.message) ? json.message : (currentLang === 'en' ? 'Submission failed. Please try again later.' : '提交失败，请稍后再试。');
+        resultEl.innerHTML = '<div class="error">' + msg + '</div>';
+      }
+    }catch(err){
+      resultEl.innerHTML = '<div class="error">' + (currentLang === 'en' ? 'Network error. Please try again later.' : '网络错误，请稍后再试。') + '</div>';
+    }
+    return;
+  }
+
+  // Fallback: open user's mail client with prefilled subject/body
+  const toEmail = 'contact.keepjoy@gmail.com';
+  const mailSubject = encodeURIComponent('['+category+'] ' + subject + ' - ' + name);
+  const bodyLines = [];
+  bodyLines.push('Name: ' + name);
+  bodyLines.push('Email: ' + email);
+  bodyLines.push('Category: ' + category);
+  bodyLines.push('');
+  bodyLines.push(message);
+  const mailBody = encodeURIComponent(bodyLines.join('\n'));
+  const mailto = `mailto:${toEmail}?subject=${mailSubject}&body=${mailBody}`;
+  window.location.href = mailto;
+  resultEl.innerHTML = '<div class="success">' + (currentLang === 'en' ? 'Opened your mail client to send. If it did not open, copy and send to ' : '正在打开邮件客户端。如果未打开，请复制并发送至 ') + '<a href="mailto:'+toEmail+'">'+toEmail+'</a></div>';
+});
+  </script>
+</body>
+</html>

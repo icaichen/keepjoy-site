@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KeepJoy: Home Declutter — Spark Joy, Keep Memories</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sohne:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f5f9fc;
+        --fg: #0f1419;
+        --muted: #5a6b7a;
+        --accent-cyan: #1fd9d1;
+        --accent-purple: #9370db;
+        --accent: linear-gradient(135deg, #1fd9d1, #9370db);
+        --card: #ffffff;
+        --border: #d9e5ed;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+        font-family: "Sohne", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--fg);
+        line-height: 1.6;
+      }
+      header {
+        padding: 24px clamp(16px, 5vw, 60px);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        background: rgba(245, 249, 252, 0.95);
+        backdrop-filter: blur(10px);
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: var(--fg);
+      }
+      .logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .logo-text {
+        font-weight: 600;
+        font-size: 18px;
+        letter-spacing: -0.5px;
+      }
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .lang-dropdown{position:relative}
+      .lang-button{background:transparent;border:1px solid var(--border);padding:8px;border-radius:8px;display:flex;align-items:center;gap:6px;cursor:pointer}
+      .lang-menu{position:absolute;right:0;top:calc(100% + 8px);background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px;box-shadow:0 8px 24px rgba(16,24,40,0.08);display:none;z-index:50;min-width:140px}
+      .lang-menu.show{display:block}
+      .lang-menu button{background:transparent;border:none;padding:8px 10px;width:100%;text-align:left;border-radius:6px;cursor:pointer}
+      .lang-menu button:hover{background:rgba(0,0,0,0.03)}
+      .lang-switch {
+        background: transparent;
+        border: 1px solid var(--border);
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 13px;
+        cursor: pointer;
+        color: var(--fg);
+        font-weight: 500;
+        transition: all 0.2s;
+      }
+      .lang-switch:hover {
+        border-color: var(--accent-cyan);
+        background: rgba(31, 217, 209, 0.05);
+      }
+      .cta {
+        border-radius: 8px;
+        background: var(--accent);
+        color: white;
+        padding: 10px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+        font-family: inherit;
+        box-shadow: 0 4px 16px rgba(31, 217, 209, 0.18);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        min-width: 120px;
+        padding-left: 18px;
+        padding-right: 18px;
+        text-decoration: none;
+      }
+      .cta:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(31, 217, 209, 0.4);
+      }
+      @media (max-width: 520px) {
+        .cta { min-width: 0; padding: 9px 12px; }
+      }
+      /* ensure anchor CTAs never show underline */
+      .cta, .cta:link, .cta:visited, .cta:hover, .cta:active, .cta:focus { text-decoration: none; }
+      .cta:active {
+        transform: translateY(0);
+      }
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: clamp(40px, 8vw, 120px) clamp(16px, 5vw, 60px);
+        display: flex;
+        flex-direction: column;
+        gap: clamp(60px, 10vw, 100px);
+      }
+      .hero {
+        display: grid;
+        gap: 32px;
+        max-width: 680px;
+      }
+      .hero h1 {
+        font-size: clamp(36px, 7vw, 56px);
+        line-height: 1.1;
+        margin: 0;
+        font-weight: 600;
+        letter-spacing: -0.8px;
+      }
+      .hero p {
+        font-size: clamp(16px, 2vw, 18px);
+        color: var(--muted);
+        margin: 0;
+        line-height: 1.7;
+      }
+      .hero-cta-group {
+        display: flex;
+        gap: 12px;
+        margin-top: 12px;
+      }
+      .benefits-section {
+        text-align: center;
+      }
+      .benefits-section h2 {
+        font-size: clamp(32px, 6vw, 48px);
+        margin: 0 0 16px 0;
+        font-weight: 600;
+        letter-spacing: -0.6px;
+      }
+      .benefits-section .subtitle {
+        font-size: clamp(16px, 2vw, 18px);
+        color: var(--muted);
+        margin: 0 0 48px 0;
+      }
+      .benefits-grid {
+        display: grid;
+        gap: 24px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .benefit-card {
+        background: var(--card);
+        border-radius: 24px;
+        padding: 40px 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+      }
+      .benefit-card:hover {
+        border-color: var(--accent-cyan);
+        box-shadow: 0 12px 32px rgba(31, 217, 209, 0.15);
+        transform: translateY(-4px);
+      }
+      .icon-circle {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(31, 217, 209, 0.1), rgba(147, 112, 219, 0.1));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .icon-circle svg {
+        width: 36px;
+        height: 36px;
+        stroke: var(--fg);
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .benefit-card h3 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: -0.3px;
+      }
+      .benefit-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+        font-size: 15px;
+      }
+      footer {
+        padding: 40px clamp(16px, 5vw, 60px);
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 13px;
+        text-align: center;
+      }
+      footer a {
+        color: var(--fg);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      footer a:hover {
+        color: var(--accent-cyan);
+      }
+      @media (max-width: 640px) {
+        nav {
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+        .hero-cta-group {
+          flex-direction: column;
+          width: fit-content;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="#" class="logo-section">
+          <div class="logo">
+            <img src="logo.png" alt="KeepJoy: Home Declutter" />
+          </div>
+          <span class="logo-text">KeepJoy</span>
+        </a>
+        <div class="nav-right">
+          <div class="lang-dropdown">
+            <button id="langBtn" class="lang-button" aria-haspopup="true" aria-expanded="false" title="Language">
+              <!-- simple monochrome globe icon -->
+              <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M12 3v18" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+                <path d="M3 12h18" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+                <path d="M5 7c3 1.5 6 1.5 14 0" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"/>
+                <path d="M5 17c3-1.5 6-1.5 14 0" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <div id="langMenu" class="lang-menu" role="menu" aria-hidden="true">
+              <button data-lang="en">English</button>
+              <button data-lang="zh">中文</button>
+            </div>
+          </div>
+          <a href="contact.html" id="nav-contact" class="cta">Contact Us</a>
+          <a href="download.html" id="nav-download" class="cta">Download App</a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section class="hero">
+        <h1 id="hero-title">Declutter smarter. Keep memories that truly matter.</h1>
+        <p id="hero-desc">
+          KeepJoy is a mindful decluttering companion that helps you organize your home, track your progress, and document the stories behind your belongings. Clean with purpose, let go with clarity, and build a space you love living in.
+        </p>
+      </section>
+      <section class="benefits-section">
+        <h2 id="features-title">Features</h2>
+        <p class="subtitle" id="features-subtitle"></p>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="icon-circle">
+              <svg viewBox="0 0 24 24">
+                <polyline points="12 1 15 9 23 9 17 14 19 22 12 18 5 22 7 14 1 9 9 9 12 1"></polyline>
+              </svg>
+            </div>
+            <h3 id="card1-title">Smart Progress Dashboard</h3>
+            <p id="card1-desc">See your decluttering stats in real time — sessions, categories, outcomes, and where your time truly goes. Understand your habits and make steady progress.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="icon-circle">
+              <svg viewBox="0 0 24 24">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+            </div>
+            <h3 id="card2-title">Before–After Stories</h3>
+            <p id="card2-desc">Document every transformation. Compare spaces before and after you declutter and build a visual record of your growth.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="icon-circle">
+              <svg viewBox="0 0 24 24">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </div>
+            <h3 id="card3-title">Meaningful Memory Archive</h3>
+            <p id="card3-desc">Keep photos, notes, and sentimental stories behind the items you decide to keep or let go. A gentle way to honor your past while moving forward.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="icon-circle">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"></path>
+                <path d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"></path>
+              </svg>
+            </div>
+            <h3 id="card4-title">Personalized Declutter Modes</h3>
+            <p id="card4-desc">Choose guided modes based on your energy, time, and goals — from quick sessions to deeper emotional decluttering.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      © <span id="year"></span> KeepJoy: Home Declutter. <span id="footer-text">Designed for mindful living.</span> &nbsp;|&nbsp;
+      <!-- contact moved to navbar -->
+      <a href="privacy.html" id="footer-privacy">Privacy Policy</a> &nbsp;|&nbsp;
+      <a href="terms.html" id="footer-terms">Terms of Service</a>
+    </footer>
+    <script>
+      const translations = {
+        en: {
+          'hero-title': 'Declutter smarter. Keep memories that truly matter.',
+          'hero-desc': 'KeepJoy: Home Declutter is a mindful decluttering companion that helps you organize your home, track your progress, and document the stories behind your belongings. Clean with purpose, let go with clarity, and build a space you love living in.',
+          'features-title': 'Features',
+          'features-subtitle': '',
+          'card1-title': 'Smart Progress Dashboard',
+          'card1-desc': 'See your decluttering stats in real time — sessions, categories, outcomes, and where your time truly goes. Understand your habits and make steady progress.',
+          'card2-title': 'Before–After Stories',
+          'card2-desc': 'Document every transformation. Compare spaces before and after you declutter and build a visual record of your growth.',
+          'card3-title': 'Meaningful Memory Archive',
+          'card3-desc': 'Keep photos, notes, and sentimental stories behind the items you decide to keep or let go. A gentle way to honor your past while moving forward.',
+          'card4-title': 'Personalized Declutter Modes',
+          'card4-desc': 'Choose guided modes based on your energy, time, and goals — from quick sessions to deeper emotional decluttering.',
+          'footer-text': 'Designed for mindful living.',
+          'footer-privacy': 'Privacy Policy',
+          'footer-terms': 'Terms of Service',
+          'nav-contact': 'Contact Us',
+          'nav-download': 'Download App'
+        },
+        zh: {
+          'hero-title': '更聪明地整理，留住真正重要的回忆。',
+          'hero-desc': '喜物收纳 - 整理规划与断舍离助手是一款有意识整理 App，帮助你规划整理、记录前后变化、追踪成果，并保存物品背后的故事。带着目的去清理，用清晰的心态放手，打造一个让你真正喜爱的生活空间。',
+          'features-title': '功能亮点',
+          'features-subtitle': '',
+          'card1-title': '智能进度仪表盘',
+          'card1-desc': '实时查看整理数据：会话、类别、处理结果、时间分布。帮你了解自己的整理习惯，持续稳步前进。',
+          'card2-title': '前后变化记录',
+          'card2-desc': '记录每一次改变。对比空间整理前后的样子，形成属于你的视觉成长日志。',
+          'card3-title': '回忆档案馆',
+          'card3-desc': '保存物品背后的照片、笔记与故事，无论是保留还是放手，都能温柔记录你的生活与成长。',
+          'card4-title': '个性化整理模式',
+          'card4-desc': '根据你的精力、时间与目标选择整理模式——快速整理、深度整理、情绪整理，全都轻松完成。',
+          'footer-text': '为有意识的生活而生。',
+          'footer-privacy': '隐私政策',
+          'footer-terms': '服务条款',
+          'nav-contact': '联系我们',
+          'nav-download': '下载应用'
+        }
+      };
+
+      let currentLang = 'en';
+
+      function toggleLanguage() {
+        currentLang = currentLang === 'en' ? 'zh' : 'en';
+        updatePageLanguage();
+        localStorage.setItem('language', currentLang);
+      }
+
+      // Set language explicitly (used by dropdown)
+      function setLanguage(lang){
+        if(!lang) return;
+        currentLang = lang;
+        updatePageLanguage();
+        localStorage.setItem('language', currentLang);
+      }
+
+      // Update local links (privacy/terms) to the correct language file
+      function updateLinksForLang(lang){
+        const privacy = document.getElementById('footer-privacy');
+        const terms = document.getElementById('footer-terms');
+        if(privacy) privacy.href = (lang === 'zh') ? 'privacy_zh.html' : 'privacy.html';
+        if(terms) terms.href = (lang === 'zh') ? 'terms_zh.html' : 'terms.html';
+        const navContact = document.getElementById('nav-contact');
+        if(navContact && navContact.tagName.toLowerCase() === 'a') navContact.href = 'contact.html';
+        const navDownload = document.getElementById('nav-download');
+        if(navDownload) navDownload.href = 'download.html';
+      }
+
+      function updatePageLanguage() {
+        const t = translations[currentLang];
+        Object.keys(t).forEach(key => {
+          const el = document.getElementById(key);
+          if (el) el.textContent = t[key];
+        });
+        document.documentElement.lang = currentLang;
+        updateLinksForLang(currentLang);
+      }
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+      
+      // Load saved language preference
+      const savedLang = localStorage.getItem('language');
+      if (savedLang) {
+        currentLang = savedLang;
+        updatePageLanguage();
+      }
+      // wire up language dropdown UI
+      (function(){
+        const langBtn = document.getElementById('langBtn');
+        const langMenu = document.getElementById('langMenu');
+        if(!langBtn || !langMenu) return;
+        langBtn.addEventListener('click', (e)=>{
+          const show = langMenu.classList.toggle('show');
+          langBtn.setAttribute('aria-expanded', show ? 'true' : 'false');
+          langMenu.setAttribute('aria-hidden', show ? 'false' : 'true');
+        });
+        langMenu.addEventListener('click', (e)=>{
+          const btn = e.target.closest('button[data-lang]');
+          if(!btn) return;
+          const lang = btn.getAttribute('data-lang');
+          setLanguage(lang);
+          langMenu.classList.remove('show');
+          langBtn.setAttribute('aria-expanded','false');
+          langMenu.setAttribute('aria-hidden','true');
+        });
+        // close on outside click
+        document.addEventListener('click', (e)=>{
+          if(!langMenu.classList.contains('show')) return;
+          if(!e.target.closest('.lang-dropdown')){
+            langMenu.classList.remove('show');
+            langBtn.setAttribute('aria-expanded','false');
+            langMenu.setAttribute('aria-hidden','true');
+          }
+        });
+      })();
+    </script>
+    <script src="lang-links.js"></script>
+  </body>
+</html>
