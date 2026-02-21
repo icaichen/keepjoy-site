@@ -168,6 +168,22 @@ const WEB3FORMS_KEY = '64387987-618f-4174-bb6b-c42ac48964a1';
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
 const form = document.getElementById('contactForm');
 const resultEl = document.getElementById('result');
+
+function openMailFallback({ name, email, subject, message, category, autoOpen = true }) {
+  const toEmail = 'contact.keepjoy@gmail.com';
+  const mailSubject = encodeURIComponent('[' + category + '] ' + subject + ' - ' + name);
+  const bodyLines = [];
+  bodyLines.push('Name: ' + name);
+  bodyLines.push('Email: ' + email);
+  bodyLines.push('Category: ' + category);
+  bodyLines.push('');
+  bodyLines.push(message);
+  const mailBody = encodeURIComponent(bodyLines.join('\n'));
+  const mailto = `mailto:${toEmail}?subject=${mailSubject}&body=${mailBody}`;
+  if (autoOpen) window.location.href = mailto;
+  resultEl.innerHTML = '<div class="success">' + (currentLang === 'en' ? 'Opened your mail client to send. If it did not open, copy and send to ' : '正在打开邮件客户端。如果未打开，请复制并发送至 ') + '<a href="mailto:' + toEmail + '">' + toEmail + '</a></div>';
+}
+
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const name = form.name.value.trim();
@@ -201,32 +217,20 @@ form.addEventListener('submit', async (e) => {
       const res = await fetch(WEB3FORMS_ENDPOINT, { method: 'POST', body: formData });
       let json = {};
       try{ json = await res.json(); }catch(e){ /* ignore JSON parse errors */ }
-      if(res.ok){
+      if(res.ok && json && json.success === true){
         resultEl.innerHTML = '<div class="success">' + (currentLang === 'en' ? 'Thank you! Your message has been sent.' : '感谢！您的信息已发送。') + '</div>';
         form.reset();
       } else {
-        const msg = (json && json.message) ? json.message : (currentLang === 'en' ? 'Submission failed. Please try again later.' : '提交失败，请稍后再试。');
-        resultEl.innerHTML = '<div class="error">' + msg + '</div>';
+        openMailFallback({ name, email, subject, message, category, autoOpen: true });
       }
     }catch(err){
-      resultEl.innerHTML = '<div class="error">' + (currentLang === 'en' ? 'Network error. Please try again later.' : '网络错误，请稍后再试。') + '</div>';
+      openMailFallback({ name, email, subject, message, category, autoOpen: true });
     }
     return;
   }
 
   // Fallback: open user's mail client with prefilled subject/body
-  const toEmail = 'contact.keepjoy@gmail.com';
-  const mailSubject = encodeURIComponent('['+category+'] ' + subject + ' - ' + name);
-  const bodyLines = [];
-  bodyLines.push('Name: ' + name);
-  bodyLines.push('Email: ' + email);
-  bodyLines.push('Category: ' + category);
-  bodyLines.push('');
-  bodyLines.push(message);
-  const mailBody = encodeURIComponent(bodyLines.join('\n'));
-  const mailto = `mailto:${toEmail}?subject=${mailSubject}&body=${mailBody}`;
-  window.location.href = mailto;
-  resultEl.innerHTML = '<div class="success">' + (currentLang === 'en' ? 'Opened your mail client to send. If it did not open, copy and send to ' : '正在打开邮件客户端。如果未打开，请复制并发送至 ') + '<a href="mailto:'+toEmail+'">'+toEmail+'</a></div>';
+  openMailFallback({ name, email, subject, message, category, autoOpen: true });
 });
   </script>
 </body>
