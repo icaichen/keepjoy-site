@@ -193,6 +193,87 @@
       .benefits-section {
         text-align: center;
       }
+      .showcase-section {
+        position: relative;
+        border-radius: 32px;
+        border: 1px solid rgba(15, 20, 25, 0.08);
+        background:
+          radial-gradient(circle at 8% 10%, rgba(31, 217, 209, 0.3), transparent 34%),
+          radial-gradient(circle at 92% 6%, rgba(147, 112, 219, 0.3), transparent 36%),
+          linear-gradient(180deg, #f7fbff 0%, #eef5fc 100%);
+        padding: clamp(28px, 4vw, 44px);
+        overflow: hidden;
+        box-shadow:
+          0 24px 80px rgba(16, 24, 40, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      }
+      .showcase-section h2 {
+        font-size: clamp(30px, 5vw, 46px);
+        line-height: 1.1;
+        margin: 0;
+        letter-spacing: -0.7px;
+      }
+      .showcase-section .subtitle {
+        margin: 14px 0 0;
+        font-size: clamp(15px, 2vw, 18px);
+        color: var(--muted);
+        max-width: 760px;
+      }
+      .showcase-track {
+        margin-top: 28px;
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 6px 4px 10px;
+        scroll-snap-type: x mandatory;
+      }
+      .showcase-track::-webkit-scrollbar {
+        height: 8px;
+      }
+      .showcase-track::-webkit-scrollbar-thumb {
+        background: rgba(15, 20, 25, 0.2);
+        border-radius: 999px;
+      }
+      .screenshot-card {
+        scroll-snap-align: start;
+        min-width: clamp(180px, 22vw, 240px);
+        width: clamp(180px, 22vw, 240px);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .phone-frame {
+        border-radius: 28px;
+        padding: 10px;
+        background: linear-gradient(160deg, #091625, #243145 70%, #31455f);
+        box-shadow:
+          0 20px 40px rgba(8, 18, 30, 0.28),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+      }
+      .phone-screen {
+        border-radius: 20px;
+        overflow: hidden;
+        background: #f8fbff;
+        aspect-ratio: 9 / 19.5;
+      }
+      .phone-screen img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.35s ease;
+      }
+      .screenshot-card:hover .phone-screen img {
+        transform: scale(1.025);
+      }
+      .screenshot-caption {
+        margin: 0;
+        text-align: center;
+        font-size: 14px;
+        color: #435365;
+        letter-spacing: 0.01em;
+      }
       .benefits-section h2 {
         font-size: clamp(32px, 6vw, 48px);
         margin: 0 0 16px 0;
@@ -282,6 +363,13 @@
           flex-direction: column;
           width: fit-content;
         }
+        .showcase-track {
+          gap: 12px;
+        }
+        .screenshot-card {
+          min-width: 58vw;
+          width: 58vw;
+        }
       }
     </style>
   </head>
@@ -322,6 +410,60 @@
         <p id="hero-desc">
           KeepJoy is a mindful decluttering companion that helps you organize your home, track your progress, and document the stories behind your belongings. Clean with purpose, let go with clarity, and build a space you love living in.
         </p>
+      </section>
+      <section class="showcase-section" aria-label="App screenshots">
+        <h2 id="showcase-title">See KeepJoy in action</h2>
+        <p class="subtitle" id="showcase-subtitle">A quick peek at the app flow, from declutter sessions to memory timelines and resale insights.</p>
+        <div class="showcase-track">
+          <figure class="screenshot-card" data-shot data-en="assets/screenshots/en/home.png" data-zh="assets/screenshots/zh/home.png">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <img src="assets/screenshots/en/home.png" alt="KeepJoy home dashboard screenshot" loading="lazy" decoding="async" />
+              </div>
+            </div>
+            <figcaption class="screenshot-caption" id="shot-home">Home Dashboard</figcaption>
+          </figure>
+          <figure class="screenshot-card" data-shot data-en="assets/screenshots/en/monthly-progress.png" data-zh="assets/screenshots/zh/monthly-progress.png">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <img src="assets/screenshots/en/monthly-progress.png" alt="KeepJoy monthly progress screenshot" loading="lazy" decoding="async" />
+              </div>
+            </div>
+            <figcaption class="screenshot-caption" id="shot-progress">Monthly Progress</figcaption>
+          </figure>
+          <figure class="screenshot-card" data-shot data-en="assets/screenshots/en/items.png" data-zh="assets/screenshots/zh/items.png">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <img src="assets/screenshots/en/items.png" alt="KeepJoy items management screenshot" loading="lazy" decoding="async" />
+              </div>
+            </div>
+            <figcaption class="screenshot-caption" id="shot-items">Items Library</figcaption>
+          </figure>
+          <figure class="screenshot-card" data-shot data-en="assets/screenshots/en/memories.png" data-zh="assets/screenshots/zh/memories.png">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <img src="assets/screenshots/en/memories.png" alt="KeepJoy memories screenshot" loading="lazy" decoding="async" />
+              </div>
+            </div>
+            <figcaption class="screenshot-caption" id="shot-memories">Memory Archive</figcaption>
+          </figure>
+          <figure class="screenshot-card" data-shot data-en="assets/screenshots/en/memories-timeline.png" data-zh="assets/screenshots/zh/memories-timeline.png">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <img src="assets/screenshots/en/memories-timeline.png" alt="KeepJoy memory timeline screenshot" loading="lazy" decoding="async" />
+              </div>
+            </div>
+            <figcaption class="screenshot-caption" id="shot-timeline">Memories Timeline</figcaption>
+          </figure>
+          <figure class="screenshot-card" data-shot data-en="assets/screenshots/en/resell.png" data-zh="assets/screenshots/zh/resell.png">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <img src="assets/screenshots/en/resell.png" alt="KeepJoy resale insights screenshot" loading="lazy" decoding="async" />
+              </div>
+            </div>
+            <figcaption class="screenshot-caption" id="shot-resell">Resell Insights</figcaption>
+          </figure>
+        </div>
       </section>
       <section class="benefits-section">
         <h2 id="features-title">Features</h2>
@@ -379,6 +521,14 @@
         en: {
           'hero-title': 'Declutter smarter. Keep memories that truly matter.',
           'hero-desc': 'KeepJoy: Home Declutter is a mindful decluttering companion that helps you organize your home, track your progress, and document the stories behind your belongings. Clean with purpose, let go with clarity, and build a space you love living in.',
+          'showcase-title': 'See KeepJoy in action',
+          'showcase-subtitle': 'A quick peek at the app flow, from declutter sessions to memory timelines and resale insights.',
+          'shot-home': 'Home Dashboard',
+          'shot-progress': 'Monthly Progress',
+          'shot-items': 'Items Library',
+          'shot-memories': 'Memory Archive',
+          'shot-timeline': 'Memories Timeline',
+          'shot-resell': 'Resell Insights',
           'features-title': 'Features',
           'features-subtitle': '',
           'card1-title': 'Smart Progress Dashboard',
@@ -398,6 +548,14 @@
         zh: {
           'hero-title': '更聪明地整理，留住真正重要的回忆。',
           'hero-desc': '喜物收纳 - 整理规划与断舍离助手是一款有意识整理 App，帮助你规划整理、记录前后变化、追踪成果，并保存物品背后的故事。带着目的去清理，用清晰的心态放手，打造一个让你真正喜爱的生活空间。',
+          'showcase-title': '看看 KeepJoy 的真实体验',
+          'showcase-subtitle': '从整理任务到回忆时间线，再到转售洞察，快速了解应用核心流程。',
+          'shot-home': '主页总览',
+          'shot-progress': '本月进度',
+          'shot-items': '物品清单',
+          'shot-memories': '回忆档案',
+          'shot-timeline': '回忆时间线',
+          'shot-resell': '转售洞察',
           'features-title': '功能亮点',
           'features-subtitle': '',
           'card1-title': '智能进度仪表盘',
@@ -449,6 +607,11 @@
         Object.keys(t).forEach(key => {
           const el = document.getElementById(key);
           if (el) el.textContent = t[key];
+        });
+        document.querySelectorAll('[data-shot]').forEach((card) => {
+          const img = card.querySelector('img');
+          if (!img) return;
+          img.src = currentLang === 'zh' ? card.dataset.zh : card.dataset.en;
         });
         document.documentElement.lang = currentLang;
         updateLinksForLang(currentLang);
