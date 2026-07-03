@@ -39,95 +39,105 @@
     /* Premium custom styling specifically for the download page layout */
     .download-header-center {
       text-align: center;
-      margin-bottom: 48px;
+      margin-bottom: 56px;
+      margin-top: 20px;
     }
     
     .download-grid-premium {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      margin-bottom: 50px;
+      gap: 40px;
+      margin-bottom: 60px;
     }
     
     .download-card-premium {
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 40px 32px;
+      padding: 48px 36px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.03);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s;
+      will-change: transform;
       position: relative;
     }
     
     .download-card-premium:hover {
       transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.06);
       border-color: rgba(107, 92, 231, 0.15);
     }
     
-    .download-platform-icon {
-      font-size: 2.5rem;
-      margin-bottom: 16px;
-      width: 64px;
-      height: 64px;
-      background: var(--bg);
-      border-radius: 18px;
+    .download-platform-icon-container {
+      width: 80px;
+      height: 80px;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      margin-bottom: 20px;
+    }
+    
+    .download-platform-icon-container svg {
+      width: 40px;
+      height: 40px;
+      display: block;
     }
     
     .download-card-premium h2 {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
+      font-weight: 700;
       margin-bottom: 8px;
       color: var(--text-1);
     }
     
     .download-card-premium .platform-badge {
       display: inline-block;
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 99px;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 20px;
+      letter-spacing: 0.08em;
+      margin-bottom: 24px;
     }
     
     .download-card-premium .platform-badge.ios {
-      background: rgba(107, 92, 231, 0.1);
+      background: rgba(107, 92, 231, 0.08);
       color: var(--brand-purple);
     }
     
     .download-card-premium .platform-badge.android {
-      background: rgba(94, 207, 184, 0.12);
+      background: rgba(94, 207, 184, 0.1);
       color: #3b9b87;
     }
     
     .download-qr-container {
-      margin: 24px 0;
-      padding: 16px;
-      background: var(--bg);
+      margin: 28px 0;
+      padding: 20px;
+      background: #F8F9FA;
       border-radius: var(--radius-md);
       border: 1px dashed var(--border);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       width: 100%;
       max-width: 220px;
     }
     
     .download-qr-title {
-      font-size: 0.75rem;
-      font-weight: 600;
+      font-size: 0.72rem;
+      font-weight: 700;
       color: var(--text-2);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
     }
     
     .download-qr-svg {
@@ -142,14 +152,18 @@
     .download-requirements {
       font-size: 0.78rem;
       color: var(--text-3);
-      margin-top: auto;
+      margin-top: 24px;
       line-height: 1.4;
+      max-width: 280px;
     }
     
     @media (max-width: 768px) {
       .download-grid-premium {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 24px;
+      }
+      .download-card-premium {
+        padding: 36px 24px;
       }
     }
   </style>
@@ -197,10 +211,12 @@
       </div>
 
       <div class="download-grid-premium">
+        <!-- iOS Download Card -->
         <div class="download-card-premium">
-          <div class="download-platform-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" style="color: var(--brand-purple)">
-              <path d="M18.71,19.5C17.88,20.74,17,21.95,15.66,22c-1.34,.05-1.77-.77-3.3-.77s-2,.75-3.3,.8c-1.32,.05-2.29-1.29-3.13-2.5C4.24,17,2.94,11.58,4.7,8.55A5.48,5.48,0,0,1,9.37,5.75c1.3,0,2.52,.9,3.32,.9s2.2-.95,3.75-.79a5.16,5.16,0,0,1,4,2.2,5.07,5.07,0,0,0-2.43,4.4,5.1,5.1,0,0,0,3.12,4.66A11.75,11.75,0,0,1,18.71,19.5M15.9,3.56A4.89,4.89,0,0,0,17,0a4.94,4.94,0,0,0-3.2,1.66,4.67,4.67,0,0,0-1.15,3.48A4.55,4.55,0,0,0,15.9,3.56Z"/>
+          <div class="download-platform-icon-container">
+            <!-- Official Apple Logo SVG path -->
+            <svg viewBox="0 0 24 24" fill="currentColor" style="color: #000000">
+              <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C3.79 16.5 3.3 10.87 6.78 7.42c1.78-1.77 3.75-1.7 4.95-1 1.48.86 2.18.82 3.63 0 1.52-.86 3.12-.99 4.67.57-3.26 1.83-2.73 6.16.27 7.43-1.34 3.32-3.1 6.64-5.15 8.91c.01.01 0 0 0 0zm-2.83-16c.06-.08.12-.17.16-.27a4.91 4.91 0 0 0 1.05-3.1 4.7 4.7 0 0 0-3.33 1.7 4.29 4.29 0 0 0-1.12 3.15 4.38 4.38 0 0 0 3.24-1.48z"/>
             </svg>
           </div>
           <span class="platform-badge ios" id="ios-badge">iOS / iPadOS</span>
@@ -255,9 +271,10 @@
 
         <!-- Android Download Card -->
         <div class="download-card-premium">
-          <div class="download-platform-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" style="color: #3b9b87">
-              <path d="M12 2a10 10 0 0 1 10 10v4H2v-4A10 10 0 0 1 12 2zm-4.5 14h9a1.5 1.5 0 0 1 1.5 1.5V20a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2v-2.5A1.5 1.5 0 0 1 7.5 16zM6 11.5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0zm9 0a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0z"/>
+          <div class="download-platform-icon-container">
+            <!-- Official Android Logo SVG path -->
+            <svg viewBox="0 0 24 24" fill="currentColor" style="color: #3DDC84">
+              <path d="M17.6 9.48l1.84-3.18c.16-.31.06-.7-.25-.86a.565.565 0 0 0-.75.25l-1.92 3.3C14.95 8.35 13.52 8 12 8s-2.95.35-4.52.99L5.56 5.69c-.27-.27-.69-.27-.96 0-.25.26-.26.69 0 .95l1.8 3.12C3.86 11.23 2 13.98 2 17h20c0-3.02-1.86-5.77-4.4-7.52zM7 13c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm10 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/>
             </svg>
           </div>
           <span class="platform-badge android" id="android-badge">Android</span>
