@@ -1,380 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>KeepJoy: Home Declutter Account & Data Requests</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sohne:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        color-scheme: light;
-        --bg: #f6f8fb;
-        --fg: #0f1419;
-        --muted: #526173;
-        --accent-cyan: #21d8d0;
-        --accent-purple: #8856e6;
-        --accent: linear-gradient(135deg, #21d8d0, #8856e6);
-        --card: #ffffff;
-        --border: #d9e5ed;
-        --shadow: 0 14px 50px rgba(17, 38, 146, 0.08);
-      }
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: "Sohne", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: var(--bg);
-        color: var(--fg);
-        line-height: 1.7;
-      }
-      header {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        padding: 18px clamp(16px, 5vw, 56px);
-        background: rgba(246, 248, 251, 0.9);
-        backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--border);
-      }
-      nav {
-        max-width: 1100px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-      }
-      .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--fg);
-        text-decoration: none;
-        font-weight: 600;
-        letter-spacing: -0.3px;
-      }
-      .brand img {
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
-      }
-      .cta {
-        border-radius: 10px;
-        background: var(--accent);
-        color: white;
-        padding: 10px 16px;
-        font-size: 14px;
-        font-weight: 600;
-        border: none;
-        cursor: pointer;
-        transition: transform 0.18s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-        text-decoration: none;
-        min-height: 44px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 10px 30px rgba(33, 216, 208, 0.2);
-      }
-      .cta:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(33, 216, 208, 0.28); opacity: 0.95; }
-      .cta:active { transform: translateY(0); }
-      main {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: clamp(32px, 8vw, 96px) clamp(16px, 5vw, 56px) 100px;
-        display: flex;
-        flex-direction: column;
-        gap: clamp(38px, 7vw, 70px);
-      }
-      .hero {
-        background: radial-gradient(circle at 20% 20%, rgba(33, 216, 208, 0.12), transparent 35%), radial-gradient(circle at 80% 0%, rgba(136, 86, 230, 0.16), transparent 32%), var(--card);
-        border: 1px solid var(--border);
-        border-radius: 28px;
-        padding: clamp(24px, 6vw, 48px);
-        box-shadow: var(--shadow);
-        display: grid;
-        gap: 18px;
-      }
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 12px;
-        border-radius: 999px;
-        background: rgba(33, 216, 208, 0.12);
-        color: #0f766e;
-        font-size: 13px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-      }
-      h1 {
-        margin: 0;
-        font-size: clamp(30px, 4vw, 42px);
-        line-height: 1.15;
-        letter-spacing: -0.8px;
-      }
-      p.lead {
-        margin: 0;
-        font-size: 17px;
-        color: var(--muted);
-      }
-      .steps-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 16px;
-      }
-      .step-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        padding: 18px 18px 20px;
-        box-shadow: var(--shadow);
-        position: relative;
-      }
-      .badge {
-        width: 34px;
-        height: 34px;
-        border-radius: 12px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--accent);
-        color: white;
-        font-weight: 700;
-        font-size: 16px;
-        margin-bottom: 12px;
-        box-shadow: 0 6px 22px rgba(136, 86, 230, 0.25);
-      }
-      .step-card h3 {
-        margin: 0 0 6px 0;
-        font-size: 17px;
-      }
-      .step-card p {
-        margin: 0;
-        color: var(--muted);
-        font-size: 15px;
-      }
-      .section {
-        display: grid;
-        gap: 12px;
-      }
-      .section h2 {
-        margin: 0;
-        font-size: 22px;
-        letter-spacing: -0.2px;
-      }
-      .table-card {
-        border-radius: 20px;
-        border: 1px solid var(--border);
-        background: var(--card);
-        box-shadow: var(--shadow);
-        overflow: hidden;
-      }
-      .data-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 15px;
-      }
-      .data-table th, .data-table td {
-        padding: 14px 16px;
-        text-align: left;
-      }
-      .data-table thead {
-        background: rgba(33, 216, 208, 0.1);
-        color: #0f766e;
-        font-weight: 700;
-        font-size: 14px;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-      }
-      .data-table tbody tr + tr {
-        border-top: 1px solid var(--border);
-      }
-      .pill {
-        display: inline-flex;
-        align-items: center;
-        padding: 6px 10px;
-        border-radius: 999px;
-        font-size: 13px;
-        font-weight: 600;
-        gap: 8px;
-        background: rgba(15, 136, 94, 0.12);
-        color: #0b6b52;
-      }
-      .pill.keep { background: rgba(255, 196, 105, 0.2); color: #9a5b00; }
-      .pill.limit { background: rgba(136, 86, 230, 0.14); color: #6b37d6; }
-      .timeline {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 14px;
-      }
-      .timeline-card {
-        border-radius: 18px;
-        border: 1px solid var(--border);
-        background: var(--card);
-        padding: 16px 18px;
-        box-shadow: var(--shadow);
-      }
-      .timeline-card h3 {
-        margin: 0 0 4px 0;
-        font-size: 16px;
-      }
-      .timeline-card p {
-        margin: 0;
-        color: var(--muted);
-        font-size: 14px;
-      }
-      footer {
-        margin: 56px auto 24px;
-        max-width: 1100px;
-        padding: 0 clamp(16px, 5vw, 56px);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: #6b7785;
-        font-size: 14px;
-      }
-      footer a {
-        color: inherit;
-        text-decoration: none;
-        font-weight: 600;
-      }
-      footer a:hover { color: var(--fg); }
-      @media (max-width: 640px) {
-        nav { flex-direction: column; align-items: flex-start; }
-        footer { flex-direction: column; gap: 10px; align-items: flex-start; }
-      }
-    </style>
+    
+    <!-- Shared stylesheet -->
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header>
-      <nav>
-        <a class="brand" href="index.html">
-          <img src="logo.png" alt="KeepJoy: Home Declutter logo" />
-          <span>KeepJoy</span>
+    <!-- HEADER -->
+    <header class="site-header" id="mainHeader">
+      <div class="container nav-wrapper">
+        <a href="index.html" class="logo-link">
+          <img src="logo.png" alt="KeepJoy Logo" class="logo-img" />
+          <span class="logo-text">KeepJoy</span>
         </a>
-        <a class="cta" href="mailto:contact.keepjoy@gmail.com?subject=KeepJoy%20account%20deletion%20request">Email support</a>
-      </nav>
+        <div class="nav-right">
+          <a href="contact.html" id="nav-contact" class="nav-link">Contact Us</a>
+          <a href="download.html" id="nav-download" class="btn-cta">Download App</a>
+          
+          <!-- Lang Dropdown -->
+          <div class="lang-dropdown">
+            <button id="langBtn" class="lang-btn" aria-haspopup="true" aria-expanded="false" title="Language">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              <span id="lang-label">English</span>
+            </button>
+            <div id="langMenu" class="lang-menu" role="menu" aria-hidden="true">
+              <button data-lang="en" class="lang-option">English</button>
+              <button data-lang="zh" class="lang-option">中文</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
 
-    <main>
-      <section class="hero">
-        <span class="eyebrow">Account & deletion</span>
-        <h1>Request deletion of your KeepJoy: Home Declutter account and data</h1>
-        <p class="lead">
-          Follow the steps below to start a deletion request, see exactly which data is erased,
-          what is retained temporarily, and how long any retention lasts.
-        </p>
-        <div class="steps-grid">
-          <div class="step-card">
-            <span class="badge">1</span>
-            <h3>Submit the request in-app</h3>
-            <p>Open KeepJoy: Home Declutter &rarr; Profile &rarr; Settings &rarr; Account &rarr; <strong>Delete my account</strong>. Confirm the request and the email you used to sign in.</p>
+    <main class="main-content">
+      <div class="container">
+        <!-- Hero Card -->
+        <div class="content-card" style="margin-bottom: 40px">
+          <div class="hero-badge" style="margin-bottom:16px">
+            <div class="badge-dot"></div>
+            <span id="badge-delete-text">Account & Deletion</span>
           </div>
-          <div class="step-card">
-            <span class="badge">2</span>
-            <h3>Or email us directly</h3>
-            <p>Send an email to <strong>contact.keepjoy@gmail.com</strong> with the subject "Delete my account" from your sign-in email. Include any linked sign-in method (Apple / Google).</p>
-          </div>
-          <div class="step-card">
-            <span class="badge">3</span>
-            <h3>Verification & timing</h3>
-            <p>We verify ownership (you may be asked to confirm a code) and start deletion within 3 business days. Most data is removed within 30 days; backups clear within 30-45 days.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>What we delete</h2>
-        <div class="table-card">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Data type</th>
-                <th>Status</th>
-                <th>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Account profile & identifiers</td>
-                <td><span class="pill">Deleted</span></td>
-                <td>Email, account IDs, session tokens, and authentication identifiers used to sign in.</td>
-              </tr>
-              <tr>
-                <td>Content you created</td>
-                <td><span class="pill">Deleted</span></td>
-                <td>Items, folders, before/after photos, notes, tags, memories, timelines, and related metadata.</td>
-              </tr>
-              <tr>
-                <td>App preferences & device sync</td>
-                <td><span class="pill">Deleted</span></td>
-                <td>Notification settings, language choice, saved views, and synced copies across devices.</td>
-              </tr>
-              <tr>
-                <td>Support conversations you started</td>
-                <td><span class="pill">Deleted</span></td>
-                <td>In-app feedback threads tied to your account are purged once the request is processed.</td>
-              </tr>
-              <tr>
-                <td>Aggregated analytics</td>
-                <td><span class="pill keep">Kept (non-identifying)</span></td>
-                <td>We keep high-level, de-identified statistics that cannot be linked back to you or your content.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>What is retained temporarily (and why)</h2>
-        <div class="timeline">
-          <div class="timeline-card">
-            <h3>Operational logs - up to 30 days</h3>
-            <p>Limited logs (e.g., service events, IP city-level) remain briefly for security, abuse prevention, and audit trail. They auto-expire within 30 days.</p>
-          </div>
-          <div class="timeline-card">
-            <h3>Backups - cleared within 30-45 days</h3>
-            <p>Encrypted backups roll off on their normal cycle. Your deleted records disappear from backups within 30-45 days after processing.</p>
-          </div>
-          <div class="timeline-card">
-            <h3>Payment & receipts - retained per law</h3>
-            <p>Store-provided transaction records (Apple / Google) are kept for tax, fraud, and accounting compliance for up to 7 years; they do not include your card details.</p>
-          </div>
-          <div class="timeline-card">
-            <h3>Support emails - up to 90 days</h3>
-            <p>If you email us, the thread may remain for up to 90 days so we can resolve your request and meet legal obligations, then it is removed or anonymized.</p>
+          <h1 class="page-title" id="page-title" style="margin-bottom:14px">Request deletion of your KeepJoy account and data</h1>
+          <p class="page-lead" id="page-lead" style="margin-bottom:32px">
+            Follow the steps below to start a deletion request, see exactly which data is erased,
+            what is retained temporarily, and how long any retention lasts.
+          </p>
+          
+          <div class="download-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:20px">
+            <div class="download-option-card" style="padding: 24px; text-align: left">
+              <div class="badge" style="width:32px; height:32px; border-radius:10px; background:var(--brand-purple); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:0.95rem; margin-bottom:14px">1</div>
+              <h3 style="font-size:1.1rem; color:var(--brand-purple); margin-bottom:8px" id="step-1-title">Submit request in-app</h3>
+              <p style="font-size:0.85rem; color:var(--text-2); line-height:1.5" id="step-1-desc">Open KeepJoy &rarr; Profile &rarr; Settings &rarr; Account &rarr; Delete my account. Confirm the request and the email you used to sign in.</p>
+            </div>
+            
+            <div class="download-option-card" style="padding: 24px; text-align: left">
+              <div class="badge" style="width:32px; height:32px; border-radius:10px; background:var(--brand-purple); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:0.95rem; margin-bottom:14px">2</div>
+              <h3 style="font-size:1.1rem; color:var(--brand-purple); margin-bottom:8px" id="step-2-title">Or email us directly</h3>
+              <p style="font-size:0.85rem; color:var(--text-2); line-height:1.5" id="step-2-desc">Send an email to contact.keepjoy@gmail.com with the subject "Delete my account" from your sign-in email. Include any linked sign-in method.</p>
+            </div>
+            
+            <div class="download-option-card" style="padding: 24px; text-align: left">
+              <div class="badge" style="width:32px; height:32px; border-radius:10px; background:var(--brand-purple); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:0.95rem; margin-bottom:14px">3</div>
+              <h3 style="font-size:1.1rem; color:var(--brand-purple); margin-bottom:8px" id="step-3-title">Verification & timing</h3>
+              <p style="font-size:0.85rem; color:var(--text-2); line-height:1.5" id="step-3-desc">We verify ownership and start deletion within 3 business days. Most data is removed within 30 days; backups clear within 30-45 days.</p>
+            </div>
           </div>
         </div>
-      </section>
 
-      <section class="section">
-        <h2>Need help or want to revoke a request?</h2>
-        <div class="timeline">
-          <div class="timeline-card">
-            <h3>Contact</h3>
-            <p>Email <strong>contact.keepjoy@gmail.com</strong> and include the email tied to your account. We aim to respond within 3 business days.</p>
-          </div>
-          <div class="timeline-card">
-            <h3>Pause or cancel deletion</h3>
-            <p>If you change your mind before deletion is complete, email us immediately. Once the account and backups are purged, recovery is not possible.</p>
+        <!-- Deletion details -->
+        <div class="content-card" style="margin-bottom: 40px">
+          <h2 style="font-size: 1.5rem; color: var(--brand-purple); margin-bottom: 20px" id="sec-1-title">What we delete</h2>
+          
+          <div style="border-radius: var(--radius-md); border: 1px solid var(--border); overflow: hidden; background: #fff">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; text-align: left">
+              <thead>
+                <tr style="background: rgba(181, 245, 225, 0.25); border-bottom: 1px solid var(--border); font-family: 'Outfit', sans-serif">
+                  <th style="padding: 14px 16px; font-weight: 700" id="th-1">Data type</th>
+                  <th style="padding: 14px 16px; font-weight: 700" id="th-2">Status</th>
+                  <th style="padding: 14px 16px; font-weight: 700" id="th-3">Details</th>
+                </tr>
+              </thead>
+              <tbody style="color: var(--text-2)">
+                <tr style="border-bottom: 1px solid var(--border)">
+                  <td style="padding: 14px 16px; font-weight: 600; color: var(--brand-purple)" id="td-type-1">Account profile & identifiers</td>
+                  <td style="padding: 14px 16px"><span class="pill outline" style="background:#FFF0F2; color:#FF5A79; border:none; padding:4px 8px; border-radius:6px; font-size:0.8rem; font-weight:700" id="pill-del-1">Deleted</span></td>
+                  <td style="padding: 14px 16px" id="td-detail-1">Email, account IDs, session tokens, and authentication identifiers used to sign in.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border)">
+                  <td style="padding: 14px 16px; font-weight: 600; color: var(--brand-purple)" id="td-type-2">Content you created</td>
+                  <td style="padding: 14px 16px"><span class="pill outline" style="background:#FFF0F2; color:#FF5A79; border:none; padding:4px 8px; border-radius:6px; font-size:0.8rem; font-weight:700" id="pill-del-2">Deleted</span></td>
+                  <td style="padding: 14px 16px" id="td-detail-2">Items, folders, before/after photos, notes, tags, memories, timelines, and related metadata.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border)">
+                  <td style="padding: 14px 16px; font-weight: 600; color: var(--brand-purple)" id="td-type-3">App preferences & device sync</td>
+                  <td style="padding: 14px 16px"><span class="pill outline" style="background:#FFF0F2; color:#FF5A79; border:none; padding:4px 8px; border-radius:6px; font-size:0.8rem; font-weight:700" id="pill-del-3">Deleted</span></td>
+                  <td style="padding: 14px 16px" id="td-detail-3">Notification settings, language choice, saved views, and synced copies across devices.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border)">
+                  <td style="padding: 14px 16px; font-weight: 600; color: var(--brand-purple)" id="td-type-4">Support conversations you started</td>
+                  <td style="padding: 14px 16px"><span class="pill outline" style="background:#FFF0F2; color:#FF5A79; border:none; padding:4px 8px; border-radius:6px; font-size:0.8rem; font-weight:700" id="pill-del-4">Deleted</span></td>
+                  <td style="padding: 14px 16px" id="td-detail-4">In-app feedback threads tied to your account are purged once the request is processed.</td>
+                </tr>
+                <tr>
+                  <td style="padding: 14px 16px; font-weight: 600; color: var(--brand-purple)" id="td-type-5">Aggregated analytics</td>
+                  <td style="padding: 14px 16px"><span class="pill outline" style="background:#F0FFF9; color:#00B171; border:none; padding:4px 8px; border-radius:6px; font-size:0.8rem; font-weight:700" id="pill-keep-1">Kept (non-identifying)</span></td>
+                  <td style="padding: 14px 16px" id="td-detail-5">We keep high-level, de-identified statistics that cannot be linked back to you or your content.</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </section>
-    </main>
 
-    <footer>
-      <span>KeepJoy: Home Declutter - Spark Joy, Keep Memories</span>
-      <span>
-        <a id="footer-privacy" href="privacy.html">Privacy</a> &nbsp;|&nbsp;
-        <a id="footer-terms" href="terms.html">Terms</a>
-      </span>
-    </footer>
+        <!-- Temporary retention section -->
+        <div class="content-card" style="margin-bottom: 40px">
+          <h2 style="font-size: 1.5rem; color: var(--brand-purple); margin-bottom: 20px" id="sec-2-title">What is retained temporarily (and why)</h2>
+          
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px">
+            <div style="background:rgba(255,255,255,0.4); border:1px solid var(--border); border-radius:var(--radius-md); padding:20px">
+              <h3 style="font-size:1.05rem; color:var(--brand-purple); margin-bottom:8px" id="ret-1-title">Operational logs - up to 30 days</h3>
+              <p style="font-size:0.85rem; color:var(--text-2); line-height:1.5" id="ret-1-desc">Limited logs (e.g., service events) remain briefly for security, abuse prevention, and audit trails. They auto-expire within 30 days.</p>
+            </div>
+            
+            <div style="background:rgba(255,255,255,0.4); border:1px solid var(--border); border-radius:var(--radius-md); padding:20px">
+              <h3 style="font-size:1.05rem; color:var(--brand-purple); margin-bottom:8px" id="ret-2-title">Backups - cleared within 30-45 days</h3>
+              <p style="font-size:0.85rem; color:var(--text-2); line-height:1.5" id="ret-2-desc">Encrypted backups roll off on their normal cycle. Your deleted records disappear from backups within 30-45 days after processing.</p>
+            </div>
+            
+            <div style="background:rgba(255,255,255,0.4); border:1px solid var(--border); border-radius:var(--radius-md); padding:20px">
+              <h3 style="font-size:1.05rem; color:var(--brand-purple); margin-bottom:8px" id="ret-3-title">Payment & receipts - retained per law</h3>
+              <p style="font-size:0.85rem; color:var(--text-2); line-height:1.5" id="ret-3-desc">Store transaction records (Apple / Google) are kept for tax, fraud, and accounting compliance for up to 7 years; they do not include your card details.</p>
+            </div>
+            
+            <div style="background:rgba(255,255,255,0.4); border:1px solid var(--border); border-radius:var(--radius-md); padding:20px">
+              <h3 style="font-size:1.05rem; color:var(--brand-purple); margin-bottom:8px" id="ret-4-title">Support emails - up to 90 days</h3>
+              <p style="font-size:0.85rem; color:var(--text-2); line-height:1.5" id="ret-4-desc">If you email us, the thread may remain for up to 90 days so we can resolve your request and meet legal obligations, then it is removed or anonymized.</p>
+            </div>
+          </div>
+        </div>
 
-    <script src="lang-links.js"></script>
-  </body>
+        <!-- Help Card -->
+        <div class="content-card">
+          <h2 style="font-size: 1.5rem; color: var(--brand-purple); margin-bottom: 20px" id="sec-3-title">Need help or want to revoke a request?</h2>
+          
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px">
+            <div style="background:rgba(255,255,255,0.4); border:1px solid var(--border); border-radius:var(--radius-md); padding:20px">
+              <h3 style="font-size:1.05rem; color:var(--brand-purple); margin-bottom:8px" id="help-1-title">Contact Support</h3>
+              <p style="font-size:0.85rem; color:var(--text-2); line-height:1.5" id="help-1-desc">Email <strong>contact.keepjoy@gmail.com</strong> and include the email tied to your account. We aim to respond within 3 business days.</p>
+            </div>
+            
+            <div style="background:rgba(255,255,255,0.4); border:1px solid var(--border); border-radius:var(--radius-md); padding:20px">
+              <h3 style="font-size:1.05rem; color:var(--brand-purple); margin-bottom:8px" id="help-2-title">Pause or cancel deletion</h3>
+              <p style="font-size:0.85rem; color:var(--text-2); line-height:1.5" id="help-2-desc">If you change your mind before deletion is complete, email us immediately. Once the account and backups are purged, recovery is not possible.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a href="index.html" class="footer-logo">
+        <img src="logo.png" alt="KeepJoy Logo" style="height:32px; width:32px; border-radius:8px" />
+        <span class="logo-text">KeepJoy</span>
+      </a>
+      <div class="footer-links">
+        <a href="privacy.html" id="footer-privacy">Privacy Policy</a>
+        <a href="terms.html" id="footer-terms">Terms of Service</a>
+      </div>
+      <p class="copyright">
+        &copy; <span id="year"></span> KeepJoy. <span id="footer-text">Designed for mindful living.</span>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Translation & Core Scripts -->
+  <script>
+    const translations = {
+      en: {
+        'lang-label': 'English',
+        'badge-delete-text': 'Account & Deletion',
+        'page-title': 'Request deletion of your KeepJoy account and data',
+        'page-lead': 'Follow the steps below to start a deletion request, see exactly which data is erased, what is retained temporarily, and how long any retention lasts.',
+        'step-1-title': 'Submit request in-app',
+        'step-1-desc': 'Open KeepJoy &rarr; Profile &rarr; Settings &rarr; Account &rarr; Delete my account. Confirm the request and the email you used to sign in.',
+        'step-2-title': 'Or email us directly',
+        'step-2-desc': 'Send an email to contact.keepjoy@gmail.com with the subject "Delete my account" from your sign-in email. Include any linked sign-in method.',
+        'step-3-title': 'Verification & timing',
+        'step-3-desc': 'We verify ownership and start deletion within 3 business days. Most data is removed within 30 days; backups clear within 30-45 days.',
+        'sec-1-title': 'What we delete',
+        'th-1': 'Data type',
+        'th-2': 'Status',
+        'th-3': 'Details',
+        'td-type-1': 'Account profile & identifiers',
+        'pill-del-1': 'Deleted',
+        'td-detail-1': 'Email, account IDs, session tokens, and authentication identifiers used to sign in.',
+        'td-type-2': 'Content you created',
+        'pill-del-2': 'Deleted',
+        'td-detail-2': 'Items, folders, before/after photos, notes, tags, memories, timelines, and related metadata.',
+        'td-type-3': 'App preferences & device sync',
+        'pill-del-3': 'Deleted',
+        'td-detail-3': 'Notification settings, language choice, saved views, and synced copies across devices.',
+        'td-type-4': 'Support conversations you started',
+        'pill-del-4': 'Deleted',
+        'td-detail-4': 'In-app feedback threads tied to your account are purged once the request is processed.',
+        'td-type-5': 'Aggregated analytics',
+        'pill-keep-1': 'Kept (non-identifying)',
+        'td-detail-5': 'We keep high-level, de-identified statistics that cannot be linked back to you or your content.',
+        'sec-2-title': 'What is retained temporarily (and why)',
+        'ret-1-title': 'Operational logs - up to 30 days',
+        'ret-1-desc': 'Limited logs (e.g., service events) remain briefly for security, abuse prevention, and audit trails. They auto-expire within 30 days.',
+        'ret-2-title': 'Backups - cleared within 30-45 days',
+        'ret-2-desc': 'Encrypted backups roll off on their normal cycle. Your deleted records disappear from backups within 30-45 days after processing.',
+        'ret-3-title': 'Payment & receipts - retained per law',
+        'ret-3-desc': 'Store transaction records (Apple / Google) are kept for tax, fraud, and accounting compliance for up to 7 years; they do not include your card details.',
+        'ret-4-title': 'Support emails - up to 90 days',
+        'ret-4-desc': 'If you email us, the thread may remain for up to 90 days so we can resolve your request and meet legal obligations, then it is removed or anonymized.',
+        'sec-3-title': 'Need help or want to revoke a request?',
+        'help-1-title': 'Contact Support',
+        'help-1-desc': 'Email contact.keepjoy@gmail.com and include the email tied to your account. We aim to respond within 3 business days.',
+        'help-2-title': 'Pause or cancel deletion',
+        'help-2-desc': 'If you change your mind before deletion is complete, email us immediately. Once the account and backups are purged, recovery is not possible.',
+        'footer-privacy': 'Privacy Policy',
+        'footer-terms': 'Terms of Service',
+        'footer-text': 'Designed for mindful living.',
+        'nav-contact': 'Contact Us',
+        'nav-download': 'Download App'
+      },
+      zh: {
+        'lang-label': '中文',
+        'badge-delete-text': '账户注销与数据清除',
+        'page-title': '注销您的 KeepJoy 账户及清除数据的说明',
+        'page-lead': '请按照以下指南提交账户注销申请，了解哪些账户数据会被清除，哪些会因为合规暂时保留以及保留时长。',
+        'step-1-title': '应用内提交申请',
+        'step-1-desc': '打开喜物收纳 &rarr; 个人资料 &rarr; 设置 &rarr; 账户管理 &rarr; 注销账户。确认申请并核对您的注册邮箱。',
+        'step-2-title': '直接发送邮件申请',
+        'step-2-desc': '使用您的账户登录邮箱发送邮件到 contact.keepjoy@gmail.com，主题为“注销我的账户”。如果有关联第三方登录（Apple/Google），请在信中注明。',
+        'step-3-title': '验证与处理时长',
+        'step-3-desc': '我们会在3个工作日内验证身份并开始销毁数据。大部分数据在 30 天内删除；历史备份在 30-45 天内彻底覆盖清除。',
+        'sec-1-title': '我们会清除的数据',
+        'th-1': '数据类型',
+        'th-2': '清除状态',
+        'th-3': '详细信息',
+        'td-type-1': '个人身份资料与账号凭证',
+        'pill-del-1': '彻底删除',
+        'td-detail-1': '电子邮箱、账户 ID、会话 Token，以及用于进行第三方身份验证的登录标识。',
+        'td-type-2': '您记录的各种用户内容',
+        'pill-del-2': '彻底删除',
+        'td-detail-2': '添加的物品卡片、分类夹、前后对比照片、备忘说明、标签、喜物回忆、时间线和关联元数据。',
+        'td-type-3': '应用偏好设置与多端同步缓存',
+        'pill-del-3': '彻底删除',
+        'td-detail-3': '推送通知的配置、偏好语言、保存的过滤视图，以及跨多台设备同步的临时云缓存。',
+        'td-type-4': '您发起的客服支持对话记录',
+        'pill-del-4': '彻底删除',
+        'td-detail-4': '绑定到您账户的内置意见反馈会话和附件，均会在账户注销完成时彻底从数据库抹去。',
+        'td-type-5': '匿名的汇总统计分析指标',
+        'pill-keep-1': '保留（已完全去标识化）',
+        'td-detail-5': '我们会保留去除了所有身份和内容标识的纯数字高维度汇总数据，用于运营指标分析；其无法重新关联到您。',
+        'sec-2-title': '因法规或运维需要暂时保留的数据',
+        'ret-1-title': '系统审计与运维日志 - 最多 30 天',
+        'ret-1-desc': '极少数系统访问和事件日志在加密环境下保留，用于保障数据安全和反作弊滥用防御，30 天内到期后自动抹去。',
+        'ret-2-title': '数据库灾备 - 30 至 45 天内覆盖',
+        'ret-2-desc': '历史的物理备份按正常滚转周期更新。数据彻底注销后，残留的历史加密备份将在 30-45 天内全部被滚转覆盖清空。',
+        'ret-3-title': '付款与订阅凭据 - 依法保留',
+        'ret-3-desc': '应用商店（App Store / Google Play）扣款凭据和收据将依据税务和财会合规保留最多 7 年；这绝不包含您的支付银行卡信息。',
+        'ret-4-title': '支持沟通邮件 - 最多 90 天',
+        'ret-4-desc': '若您通过邮件申请注销，相关邮件往来往最长保留 90 天，以确保注销流程的妥善履行和审计防范，随后会被完全抹去。',
+        'sec-3-title': '需要帮助，或者希望中止您的注销申请？',
+        'help-1-title': '联系客服支持团队',
+        'help-1-desc': '请使用注册邮箱发送邮件至 contact.keepjoy@gmail.com。我们通常会在 3 个工作日内给您回复。',
+        'help-2-title': '暂停或撤销数据注销请求',
+        'help-2-desc': '如果您在注销处理完毕之前改变了主意，请立即通过邮件告知我们。一旦在数据库和备份中完成抹除，将无法恢复任何数据。',
+        'footer-privacy': '隐私政策',
+        'footer-terms': '服务条款',
+        'footer-text': '为有意识的生活而生。',
+        'nav-contact': '联系我们',
+        'nav-download': '下载应用'
+      }
+    };
+
+    let currentLang = 'en';
+
+    function setLanguage(lang) {
+      if (!lang) return;
+      currentLang = lang;
+      updatePageLanguage();
+      localStorage.setItem('language', lang);
+    }
+
+    function updateLinksForLang(lang) {
+      const privacy = document.getElementById('footer-privacy');
+      const terms = document.getElementById('footer-terms');
+      if (privacy) privacy.href = (lang === 'zh') ? 'privacy_zh.html' : 'privacy.html';
+      if (terms) terms.href = (lang === 'zh') ? 'terms_zh.html' : 'terms.html';
+    }
+
+    function updatePageLanguage() {
+      const t = translations[currentLang];
+      
+      // Basic IDs translation
+      Object.keys(t).forEach(key => {
+        const el = document.getElementById(key);
+        if (el) el.textContent = t[key];
+      });
+
+      // Special items translation
+      document.getElementById('page-title').textContent = t['page-title'];
+      document.getElementById('page-lead').textContent = t['page-lead'];
+      document.getElementById('step-1-title').textContent = t['step-1-title'];
+      document.getElementById('step-1-desc').innerHTML = t['step-1-desc'];
+      document.getElementById('step-2-title').textContent = t['step-2-title'];
+      document.getElementById('step-2-desc').textContent = t['step-2-desc'];
+      document.getElementById('step-3-title').textContent = t['step-3-title'];
+      document.getElementById('step-3-desc').textContent = t['step-3-desc'];
+
+      document.getElementById('sec-1-title').textContent = t['sec-1-title'];
+      document.getElementById('th-1').textContent = t['th-1'];
+      document.getElementById('th-2').textContent = t['th-2'];
+      document.getElementById('th-3').textContent = t['th-3'];
+
+      document.getElementById('td-type-1').textContent = t['td-type-1'];
+      document.getElementById('pill-del-1').textContent = t['pill-del-1'];
+      document.getElementById('td-detail-1').textContent = t['td-detail-1'];
+      
+      document.getElementById('td-type-2').textContent = t['td-type-2'];
+      document.getElementById('pill-del-2').textContent = t['pill-del-2'];
+      document.getElementById('td-detail-2').textContent = t['td-detail-2'];
+
+      document.getElementById('td-type-3').textContent = t['td-type-3'];
+      document.getElementById('pill-del-3').textContent = t['pill-del-3'];
+      document.getElementById('td-detail-3').textContent = t['td-detail-3'];
+
+      document.getElementById('td-type-4').textContent = t['td-type-4'];
+      document.getElementById('pill-del-4').textContent = t['pill-del-4'];
+      document.getElementById('td-detail-4').textContent = t['td-detail-4'];
+
+      document.getElementById('td-type-5').textContent = t['td-type-5'];
+      document.getElementById('pill-keep-1').textContent = t['pill-keep-1'];
+      document.getElementById('td-detail-5').textContent = t['td-detail-5'];
+
+      document.getElementById('sec-2-title').textContent = t['sec-2-title'];
+      document.getElementById('ret-1-title').textContent = t['ret-1-title'];
+      document.getElementById('ret-1-desc').textContent = t['ret-1-desc'];
+      document.getElementById('ret-2-title').textContent = t['ret-2-title'];
+      document.getElementById('ret-2-desc').textContent = t['ret-2-desc'];
+      document.getElementById('ret-3-title').textContent = t['ret-3-title'];
+      document.getElementById('ret-3-desc').textContent = t['ret-3-desc'];
+      document.getElementById('ret-4-title').textContent = t['ret-4-title'];
+      document.getElementById('ret-4-desc').textContent = t['ret-4-desc'];
+
+      document.getElementById('sec-3-title').textContent = t['sec-3-title'];
+      document.getElementById('help-1-title').textContent = t['help-1-title'];
+      document.getElementById('help-1-desc').innerHTML = t['help-1-desc'];
+      document.getElementById('help-2-title').textContent = t['help-2-title'];
+      document.getElementById('help-2-desc').textContent = t['help-2-desc'];
+
+      document.documentElement.lang = currentLang;
+      updateLinksForLang(currentLang);
+    }
+
+    // Wire up language dropdown
+    (function(){
+      const langBtn = document.getElementById('langBtn');
+      const langMenu = document.getElementById('langMenu');
+      if(!langBtn || !langMenu) return;
+      
+      langBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const show = langMenu.classList.toggle('show');
+        langBtn.setAttribute('aria-expanded', show ? 'true' : 'false');
+        langMenu.setAttribute('aria-hidden', show ? 'false' : 'true');
+      });
+      
+      langMenu.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-lang]');
+        if(!btn) return;
+        const lang = btn.getAttribute('data-lang');
+        setLanguage(lang);
+        langMenu.classList.remove('show');
+        langBtn.setAttribute('aria-expanded', 'false');
+        langMenu.setAttribute('aria-hidden', 'true');
+      });
+      
+      document.addEventListener('click', (e) => {
+        if(!langMenu.classList.contains('show')) return;
+        if(!e.target.closest('.lang-dropdown')){
+          langMenu.classList.remove('show');
+          langBtn.setAttribute('aria-expanded', 'false');
+          langMenu.setAttribute('aria-hidden', 'true');
+        }
+      });
+    })();
+
+    // Copyright year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Load language preference
+    const savedLang = localStorage.getItem('language');
+    if (savedLang) {
+      currentLang = savedLang;
+      updatePageLanguage();
+    } else {
+      const userLang = navigator.language || navigator.userLanguage;
+      if (userLang && userLang.toLowerCase().startsWith('zh')) {
+        currentLang = 'zh';
+        updatePageLanguage();
+      }
+    }
+  </script>
+</body>
 </html>

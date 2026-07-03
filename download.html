@@ -31,337 +31,419 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sohne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Shared stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+  
   <style>
-    :root {
-      --bg: #f5f9fc;
-      --fg: #0f1419;
-      --muted: #5a6b7a;
-      --card: #ffffff;
-      --border: #d9e5ed;
-      --accent-cyan: #1fd9d1;
-      --accent-purple: #9370db;
-      --accent: linear-gradient(135deg, #1fd9d1, #9370db);
-      --shadow: 0 18px 48px rgba(17, 24, 39, 0.12);
+    /* Premium custom styling specifically for the download page layout */
+    .download-header-center {
+      text-align: center;
+      margin-bottom: 48px;
     }
-    *, *::before, *::after { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Sohne", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at 18% 20%, rgba(31, 217, 209, 0.12), transparent 36%),
-                  radial-gradient(circle at 82% 8%, rgba(147, 112, 219, 0.16), transparent 40%),
-                  var(--bg);
-      color: var(--fg);
-      min-height: 100vh;
-      padding: clamp(18px, 4vw, 32px);
-    }
-    .page { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 32px;
-      gap: 16px;
-    }
-    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--fg); }
-    .brand img { width: 44px; height: 44px; border-radius: 12px; box-shadow: 0 8px 24px rgba(17, 24, 39, 0.12); }
-    .brand strong { font-size: 18px; letter-spacing: -0.3px; }
-    .lang-toggle {
-      display: inline-flex;
-      padding: 4px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.72);
-      gap: 4px;
-      box-shadow: 0 10px 30px rgba(17, 24, 39, 0.08);
-    }
-    .lang-btn {
-      border: none;
-      background: transparent;
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-weight: 600;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: inherit;
-    }
-    .lang-btn.active { background: var(--accent); color: #fff; box-shadow: 0 10px 28px rgba(147, 112, 219, 0.3); }
-    .hero {
+    
+    .download-grid-premium {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: clamp(24px, 6vw, 40px);
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+    
+    .download-card-premium {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
     }
-    .hero h1 {
-      font-size: clamp(34px, 6vw, 52px);
-      letter-spacing: -0.8px;
-      margin: 0 0 10px 0;
+    
+    .download-card-premium:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+      border-color: rgba(107, 92, 231, 0.15);
     }
-    .hero p { margin: 0; color: var(--muted); font-size: clamp(16px, 2vw, 18px); line-height: 1.7; }
-    .cta-row { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
-    .cta {
-      border: none;
-      border-radius: 14px;
-      padding: 12px 16px;
-      min-width: 200px;
-      display: inline-flex;
+    
+    .download-platform-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      width: 64px;
+      height: 64px;
+      background: var(--bg);
+      border-radius: 18px;
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+    }
+    
+    .download-card-premium h2 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      color: var(--text-1);
+    }
+    
+    .download-card-premium .platform-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 0.75rem;
       font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-      color: #fff;
-      background: var(--accent);
-      box-shadow: 0 12px 34px rgba(31, 217, 209, 0.22);
-      transition: transform 0.2s ease, opacity 0.2s ease;
-      font-family: inherit;
-      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 20px;
     }
-    .cta:hover { transform: translateY(-1px); opacity: 0.95; }
-    .cta.secondary {
-      background: rgba(31, 217, 209, 0.12);
-      color: #0f1419;
-      border: 1px solid rgba(31, 217, 209, 0.4);
-      box-shadow: none;
+    
+    .download-card-premium .platform-badge.ios {
+      background: rgba(107, 92, 231, 0.1);
+      color: var(--brand-purple);
     }
-    .note { color: var(--muted); font-size: 14px; margin-top: 6px; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
-      margin-top: 34px;
+    
+    .download-card-premium .platform-badge.android {
+      background: rgba(94, 207, 184, 0.12);
+      color: #3b9b87;
     }
-    .card {
-      background: var(--card);
-      border-radius: 20px;
-      padding: 20px;
-      border: 1px solid rgba(217, 229, 237, 0.8);
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-    .card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 85% 10%, rgba(147, 112, 219, 0.12), transparent 40%);
-      pointer-events: none;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 12px;
-      background: rgba(31, 217, 209, 0.12);
-      color: #0f1419;
-      font-weight: 700;
-      font-size: 13px;
-      margin-bottom: 10px;
-    }
-    .card h3 { margin: 0 0 6px; font-size: 20px; }
-    .card p { margin: 0; color: var(--muted); line-height: 1.6; }
-    .platform {
+    
+    .download-qr-container {
+      margin: 24px 0;
+      padding: 16px;
+      background: var(--bg);
+      border-radius: var(--radius-md);
+      border: 1px dashed var(--border);
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 14px;
-      flex-wrap: wrap;
+      gap: 10px;
+      width: 100%;
+      max-width: 220px;
     }
-    .pill {
-      background: rgba(15, 20, 25, 0.04);
-      padding: 8px 12px;
-      border-radius: 10px;
+    
+    .download-qr-title {
+      font-size: 0.75rem;
       font-weight: 600;
-      color: #0f1419;
-      font-size: 13px;
+      color: var(--text-2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
-    .pill.outline { border: 1px dashed var(--border); background: transparent; }
-    .muted-small { font-size: 13px; color: var(--muted); }
-    .footer-links { margin-top: 26px; font-size: 14px; color: var(--muted); }
-    .footer-links a { color: #2a6eea; text-decoration: none; }
-    .footer-links a:hover { text-decoration: underline; }
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      .top { flex-direction: column; align-items: flex-start; }
+    
+    .download-qr-svg {
+      width: 140px;
+      height: 140px;
+      background: var(--white);
+      border-radius: 8px;
+      padding: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
     }
-    @media (max-width: 540px) {
-      body { padding: 16px; }
-      .lang-toggle { width: 100%; justify-content: center; }
+    
+    .download-requirements {
+      font-size: 0.78rem;
+      color: var(--text-3);
+      margin-top: auto;
+      line-height: 1.4;
+    }
+    
+    @media (max-width: 768px) {
+      .download-grid-premium {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <div class="top">
-      <a class="brand" href="index.html">
-        <img src="logo.svg" alt="KeepJoy: Home Declutter logo" />
-        <strong>KeepJoy</strong>
+  <!-- HEADER -->
+  <header class="site-header" id="mainHeader">
+    <div class="container nav-wrapper">
+      <a href="index.html" class="logo-link">
+        <img src="logo.png" alt="KeepJoy Logo" class="logo-img" />
+        <span class="logo-text">KeepJoy</span>
       </a>
-      <div class="lang-toggle" aria-label="Switch language">
-        <button class="lang-btn active" data-lang="en">EN</button>
-        <button class="lang-btn" data-lang="zh">中文</button>
+      <div class="nav-right">
+        <a href="contact.html" id="nav-contact" class="nav-link">Contact Us</a>
+        <a href="download.html" id="nav-download" class="btn-cta">Download App</a>
+        
+        <!-- Lang Dropdown -->
+        <div class="lang-dropdown">
+          <button id="langBtn" class="lang-btn" aria-haspopup="true" aria-expanded="false" title="Language">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <span id="lang-label">English</span>
+          </button>
+          <div id="langMenu" class="lang-menu" role="menu" aria-hidden="true">
+            <button data-lang="en" class="lang-option">English</button>
+            <button data-lang="zh" class="lang-option">中文</button>
+          </div>
+        </div>
       </div>
     </div>
+  </header>
 
-    <div class="hero">
-      <div>
-        <p class="badge" data-copy="eyebrow">Cross-platform</p>
-        <h1 data-copy="title">Download KeepJoy</h1>
-        <p data-copy="subtitle">Organize, declutter, and keep memories across all your devices. Choose your platform below.</p>
-        <div class="cta-row">
-          <a class="cta" id="iosCta" href="https://apps.apple.com/us/app/keepjoy-organize-mindfully/id6755450700" target="_blank" rel="noopener" data-copy="iosCta">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-            Download on App Store
+  <main class="main-content">
+    <div class="container">
+      <div class="download-header-center">
+        <div class="hero-badge">
+          <div class="badge-dot"></div>
+          <span id="eyebrow">Available Now</span>
+        </div>
+        <h1 class="page-title" id="title">Get KeepJoy</h1>
+        <p class="page-lead" id="subtitle">Declutter, plan, and preserve memories on your mobile device. Scan the code or tap to download.</p>
+      </div>
+
+      <div class="download-grid-premium">
+        <div class="download-card-premium">
+          <div class="download-platform-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" style="color: var(--brand-purple)">
+              <path d="M18.71,19.5C17.88,20.74,17,21.95,15.66,22c-1.34,.05-1.77-.77-3.3-.77s-2,.75-3.3,.8c-1.32,.05-2.29-1.29-3.13-2.5C4.24,17,2.94,11.58,4.7,8.55A5.48,5.48,0,0,1,9.37,5.75c1.3,0,2.52,.9,3.32,.9s2.2-.95,3.75-.79a5.16,5.16,0,0,1,4,2.2,5.07,5.07,0,0,0-2.43,4.4,5.1,5.1,0,0,0,3.12,4.66A11.75,11.75,0,0,1,18.71,19.5M15.9,3.56A4.89,4.89,0,0,0,17,0a4.94,4.94,0,0,0-3.2,1.66,4.67,4.67,0,0,0-1.15,3.48A4.55,4.55,0,0,0,15.9,3.56Z"/>
+            </svg>
+          </div>
+          <span class="platform-badge ios" id="ios-badge">iOS / iPadOS</span>
+          <h2 id="ios-title">Download for iPhone</h2>
+          
+          <!-- Stylized Apple QR code SVG -->
+          <div class="download-qr-container">
+            <span class="download-qr-title" id="scan-ios-label">Scan to Download</span>
+            <svg class="download-qr-svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+              <!-- QR Finder Patterns -->
+              <rect x="5" y="5" width="22" height="22" rx="2" fill="none" stroke="#6B5CE7" stroke-width="6"/>
+              <rect x="11" y="11" width="10" height="10" rx="1" fill="#6B5CE7"/>
+              
+              <rect x="73" y="5" width="22" height="22" rx="2" fill="none" stroke="#6B5CE7" stroke-width="6"/>
+              <rect x="79" y="11" width="10" height="10" rx="1" fill="#6B5CE7"/>
+              
+              <rect x="5" y="73" width="22" height="22" rx="2" fill="none" stroke="#6B5CE7" stroke-width="6"/>
+              <rect x="11" y="79" width="10" height="10" rx="1" fill="#6B5CE7"/>
+              
+              <!-- QR Dummy Noise Dots -->
+              <rect x="35" y="8" width="8" height="8" rx="1" fill="#111827"/>
+              <rect x="50" y="5" width="12" height="6" rx="1" fill="#111827"/>
+              <rect x="38" y="20" width="18" height="6" rx="1" fill="#111827"/>
+              <rect x="15" y="36" width="6" height="18" rx="1" fill="#111827"/>
+              <rect x="28" y="45" width="12" height="12" rx="1" fill="#6B5CE7"/>
+              <rect x="5" y="60" width="8" height="6" rx="1" fill="#111827"/>
+              <rect x="44" y="32" width="22" height="6" rx="1" fill="#111827"/>
+              <rect x="52" y="44" width="8" height="14" rx="1" fill="#111827"/>
+              <rect x="80" y="35" width="15" height="8" rx="1" fill="#111827"/>
+              <rect x="72" y="50" width="6" height="18" rx="1" fill="#111827"/>
+              <rect x="84" y="74" width="10" height="10" rx="1" fill="#111827"/>
+              <rect x="35" y="65" width="12" height="8" rx="1" fill="#111827"/>
+              <rect x="52" y="76" width="16" height="6" rx="1" fill="#111827"/>
+              <rect x="38" y="88" width="24" height="6" rx="1" fill="#111827"/>
+              
+              <!-- Center custom branding element -->
+              <rect x="42" y="42" width="16" height="16" rx="4" fill="#6B5CE7"/>
+              <path d="M50 46v8M46 50h8" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <a class="store-badge-official" href="https://apps.apple.com/us/app/keepjoy-organize-mindfully/id6755450700" target="_blank" rel="noopener" id="ios-btn" aria-label="Download on App Store">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135 40">
+              <path d="M130,40H5A5,5,0,0,1,0,35V5A5,5,0,0,1,5,0H130a5,5,0,0,1,5,5V35A5,5,0,0,1,130,40Z" fill="#000" stroke="#a6a6a6" stroke-width="0.5"/>
+              <path d="M21.2,23.5a3.8,3.8,0,0,1,1.8-3.1,3.9,3.9,0,0,0-3.1-2.1c-1.3-.1-2.6.7-3.3.7s-1.8-.7-2.9-.7a4.2,4.2,0,0,0-3.6,2.2c-1.6,2.7-.4,6.7,1.1,8.9s3.3,4.2,4.8,3.7,2.1-1.1,3.8-1.1,2.2,1,3.7,1,3.2-1.9,4.2-3.3a8,8,0,0,0-1.9-3.2A4.2,4.2,0,0,1,21.2,23.5ZM19.2,14.6a3.8,3.8,0,0,0,.9-2.8,3.9,3.9,0,0,0-2.5,1.3,3.7,3.7,0,0,0-.9,2.8A3.4,3.4,0,0,0,19.2,14.6Z" fill="#fff"/>
+              <text x="35" y="15" fill="#fff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8" font-weight="500">Download on the</text>
+              <text x="35" y="30" fill="#fff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" letter-spacing="-0.02em">App Store</text>
+            </svg>
           </a>
-          <a class="cta secondary" id="androidCta" href="mailto:contact.keepjoy@gmail.com?subject=KeepJoy%20Android%20Beta" data-copy="androidCta">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3,18.5V5.5C3,4.12 4.12,3 5.5,3H18.5C19.88,3 21,4.12 21,5.5V18.5C21,19.88 19.88,21 18.5,21H5.5C4.12,21 3,19.88 3,18.5M8.5,15.5L11,13V17H13V13L15.5,15.5L17,14L12,9L7,14L8.5,15.5Z"/></svg>
-            Request Android beta
+          <p class="download-requirements" id="ios-req">Requires iOS 15.0 or later. Compatible with iPhone, iPad, and iPod touch.</p>
+        </div>
+
+        <!-- Android Download Card -->
+        <div class="download-card-premium">
+          <div class="download-platform-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" style="color: #3b9b87">
+              <path d="M12 2a10 10 0 0 1 10 10v4H2v-4A10 10 0 0 1 12 2zm-4.5 14h9a1.5 1.5 0 0 1 1.5 1.5V20a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2v-2.5A1.5 1.5 0 0 1 7.5 16zM6 11.5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0zm9 0a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0z"/>
+            </svg>
+          </div>
+          <span class="platform-badge android" id="android-badge">Android</span>
+          <h2 id="android-title">Download for Android</h2>
+          
+          <!-- Stylized Android QR code SVG -->
+          <div class="download-qr-container">
+            <span class="download-qr-title" id="scan-android-label">Scan to Download</span>
+            <svg class="download-qr-svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+              <!-- QR Finder Patterns -->
+              <rect x="5" y="5" width="22" height="22" rx="2" fill="none" stroke="#5ECFB8" stroke-width="6"/>
+              <rect x="11" y="11" width="10" height="10" rx="1" fill="#5ECFB8"/>
+              
+              <rect x="73" y="5" width="22" height="22" rx="2" fill="none" stroke="#5ECFB8" stroke-width="6"/>
+              <rect x="79" y="11" width="10" height="10" rx="1" fill="#5ECFB8"/>
+              
+              <rect x="5" y="73" width="22" height="22" rx="2" fill="none" stroke="#5ECFB8" stroke-width="6"/>
+              <rect x="11" y="79" width="10" height="10" rx="1" fill="#5ECFB8"/>
+              
+              <!-- QR Dummy Noise Dots -->
+              <rect x="38" y="6" width="10" height="6" rx="1" fill="#111827"/>
+              <rect x="54" y="8" width="10" height="10" rx="1" fill="#111827"/>
+              <rect x="36" y="24" width="14" height="6" rx="1" fill="#111827"/>
+              <rect x="8" y="38" width="14" height="8" rx="1" fill="#111827"/>
+              <rect x="28" y="34" width="8" height="16" rx="1" fill="#111827"/>
+              <rect x="5" y="60" width="18" height="6" rx="1" fill="#111827"/>
+              <rect x="42" y="52" width="12" height="10" rx="1" fill="#5ECFB8"/>
+              <rect x="58" y="38" width="6" height="20" rx="1" fill="#111827"/>
+              <rect x="78" y="36" width="12" height="10" rx="1" fill="#111827"/>
+              <rect x="74" y="52" width="18" height="6" rx="1" fill="#111827"/>
+              <rect x="80" y="76" width="14" height="8" rx="1" fill="#111827"/>
+              <rect x="32" y="70" width="10" height="12" rx="1" fill="#111827"/>
+              <rect x="48" y="78" width="18" height="6" rx="1" fill="#111827"/>
+              <rect x="36" y="88" width="20" height="6" rx="1" fill="#111827"/>
+              
+              <!-- Center custom branding element -->
+              <rect x="42" y="42" width="16" height="16" rx="4" fill="#5ECFB8"/>
+              <path d="M50 46v8M46 50h8" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <a class="store-badge-official" href="https://play.google.com/store/apps/details?id=com.keepjoy.app&hl=en" target="_blank" rel="noopener" id="android-btn" aria-label="Download on Google Play Store">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135 40">
+              <path d="M130,40H5A5,5,0,0,1,0,35V5A5,5,0,0,1,5,0H130a5,5,0,0,1,5,5V35A5,5,0,0,1,130,40Z" fill="#000" stroke="#a6a6a6" stroke-width="0.5"/>
+              <g transform="translate(10, 8) scale(0.9)">
+                <path d="M1.3,1.1C1.1,1.3,1,1.7,1,2.2v20.4c0,0.5,0.1,0.9,0.3,1.1l0.1,0.1L12.5,12.7v-0.2L1.4,1.1L1.3,1.1z" fill="#00f0ff"/>
+                <path d="M16.2,8.9L12.5,12.5v0.2l3.7,3.6l0.1,0.1l4.4-2.5c1.3-0.7,1.3-1.9,0-2.6L16.2,8.9z" fill="#ffc107"/>
+                <path d="M12.5,12.6L1.4,23.7c0.4,0.4,1,0.4,1.7,0l13.2-7.5L12.5,12.6z" fill="#ff5722"/>
+                <path d="M12.5,12.6L16.3,8.8L3.1,1.3c-0.7-0.4-1.3-0.4-1.7,0L12.5,12.6z" fill="#4caf50"/>
+              </g>
+              <text x="35" y="15" fill="#fff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="7" font-weight="600" letter-spacing="0.05em">GET IT ON</text>
+              <text x="35" y="30" fill="#fff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" letter-spacing="-0.01em">Google Play</text>
+            </svg>
           </a>
-        </div>
-        <div class="note" data-copy="note">iOS app now available on App Store. Android version coming soon.</div>
-      </div>
-      <div class="card">
-        <div class="badge">✨ <span data-copy="cardTitle">What to expect</span></div>
-        <div class="grid" style="margin-top:10px">
-          <div>
-            <h3 data-copy="feature1Title">Fast capture</h3>
-            <p data-copy="feature1">Scan items, add tags, and log memories in seconds with auto-suggestions.</p>
-          </div>
-          <div>
-            <h3 data-copy="feature2Title">Smart reminders</h3>
-            <p data-copy="feature2">Get nudges to tidy, donate, or revisit keepsakes at the right moment.</p>
-          </div>
-          <div>
-            <h3 data-copy="feature3Title">Sync ready</h3>
-            <p data-copy="feature3">Your decluttering progress stays consistent across devices when you sign in.</p>
-          </div>
-        </div>
-        <div class="platform">
-          <div class="pill outline" data-copy="iosLabel">iOS · App Store ✓</div>
-          <div class="pill outline" data-copy="androidLabel">Android · Google Play (coming soon)</div>
-          <div class="muted-small" data-copy="betaNote">iOS live now · Android coming soon</div>
+          <p class="download-requirements" id="android-req">Requires Android 8.0 or later. Compatible with most Android smartphones.</p>
         </div>
       </div>
     </div>
+  </main>
 
-    <div class="grid" style="margin-top:38px">
-      <div class="card">
-        <div class="badge">📱</div>
-        <h3 data-copy="iosBlockTitle">iOS / iPadOS</h3>
-        <p data-copy="iosBlockCopy">KeepJoy: Organize Mindfully is now live on the App Store. Download it for iPhone and iPad to start your decluttering journey.</p>
-        <div class="platform">
-          <div class="pill" data-copy="statusLive">✓ Available now</div>
-          <a class="cta" href="https://apps.apple.com/us/app/keepjoy-organize-mindfully/id6755450700" target="_blank" rel="noopener" data-copy="downloadNow">Download now</a>
-        </div>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a href="index.html" class="footer-logo">
+        <img src="logo.png" alt="KeepJoy Logo" style="height:32px; width:32px; border-radius:8px" />
+        <span class="logo-text">KeepJoy</span>
+      </a>
+      <div class="footer-links">
+        <a href="privacy.html" id="footer-privacy">Privacy Policy</a>
+        <a href="terms.html" id="footer-terms">Terms of Service</a>
       </div>
-      <div class="card">
-        <div class="badge">🤖</div>
-        <h3 data-copy="androidBlockTitle">Android</h3>
-        <p data-copy="androidBlockCopy">Google Play listing is in progress. For now, you can request a closed beta build to try KeepJoy on Android.</p>
-        <div class="platform">
-          <div class="pill" data-copy="statusComing">Coming soon</div>
-          <a class="cta secondary" href="mailto:contact.keepjoy@gmail.com?subject=KeepJoy%20Android%20Beta" data-copy="getBeta">Request Android beta</a>
-        </div>
-      </div>
+      <p class="copyright">
+        &copy; <span id="year"></span> KeepJoy. <span id="footer-text">Designed for mindful living.</span>
+      </p>
     </div>
+  </footer>
 
-    <div class="footer-links">
-      <a href="index.html" data-copy="backHome">← Back to home</a> ·
-      <a href="contact.html" data-copy="contact">Contact us</a> ·
-      <a href="privacy.html" id="footer-privacy">Privacy</a> ·
-      <a href="terms.html" id="footer-terms">Terms</a>
-    </div>
-  </div>
-
-  <script src="lang-links.js"></script>
   <script>
-    const copy = {
+    const translations = {
       en: {
-        eyebrow: 'Cross-platform',
-        title: 'Download KeepJoy: Home Declutter',
-        subtitle: 'Organize, declutter, and keep memories across all your devices. Choose your platform below.',
-        iosCta: 'Download on App Store',
-        androidCta: 'Request Android beta',
-        note: 'iOS app now available on App Store. Android version coming soon.',
-        cardTitle: 'What to expect',
-        feature1Title: 'Fast capture',
-        feature1: 'Scan items, add tags, and log memories in seconds with auto-suggestions.',
-        feature2Title: 'Smart reminders',
-        feature2: 'Get nudges to tidy, donate, or revisit keepsakes at the right moment.',
-        feature3Title: 'Sync ready',
-        feature3: 'Your decluttering progress stays consistent across devices when you sign in.',
-        iosLabel: 'iOS · App Store ✓',
-        androidLabel: 'Android · Google Play (coming soon)',
-        betaNote: 'iOS live now · Android coming soon',
-        iosBlockTitle: 'iOS / iPadOS',
-        iosBlockCopy: 'KeepJoy: Organize Mindfully is now live on the App Store. Download it for iPhone and iPad to start your decluttering journey.',
-        androidBlockTitle: 'Android',
-        androidBlockCopy: 'Google Play listing is in progress. For now, you can request a closed beta build to try KeepJoy: Home Declutter on Android.',
-        statusLive: '✓ Available now',
-        statusComing: 'Coming soon',
-        downloadNow: 'Download now',
-        getBeta: 'Request Android beta',
-        backHome: '← Back to home',
-        contact: 'Contact us',
+        'lang-label': 'English',
+        'eyebrow': 'Available Now',
+        'title': 'Get KeepJoy',
+        'subtitle': 'Declutter, plan, and preserve memories on your mobile device. Scan the code or tap to download.',
+        'ios-badge': 'iOS / iPadOS',
+        'ios-title': 'Download for iPhone',
+        'scan-ios-label': 'Scan to Download',
+        'ios-req': 'Requires iOS 15.0 or later. Compatible with iPhone, iPad, and iPod touch.',
+        'android-badge': 'Android',
+        'android-title': 'Download for Android',
+        'scan-android-label': 'Scan to Download',
+        'android-req': 'Requires Android 8.0 or later. Compatible with most Android smartphones.',
+        'footer-privacy': 'Privacy Policy',
+        'footer-terms': 'Terms of Service',
+        'footer-text': 'Designed for mindful living.',
+        'nav-contact': 'Contact Us',
+        'nav-download': 'Download App'
       },
       zh: {
-        eyebrow: '跨平台',
-        title: '下载喜物收纳',
-        subtitle: '在所有设备上整理、留存回忆。选择你的平台开始体验。',
-        iosCta: '在 App Store 下载',
-        androidCta: '申请 Android Beta',
-        note: 'iOS 应用已在 App Store 上线，Android 版即将推出。',
-        cardTitle: '你会获得',
-        feature1Title: '快速记录',
-        feature1: '秒级添加物品、标签和回忆，并有智能建议。',
-        feature2Title: '智能提醒',
-        feature2: '在合适的时间提醒你整理、捐赠或回顾物品。',
-        feature3Title: '同步准备',
-        feature3: '登录后可在多设备保持整理进度一致。',
-        iosLabel: 'iOS · App Store ✓',
-        androidLabel: 'Android · Google Play（即将上线）',
-        betaNote: 'iOS 已上线 · Android 即将推出',
-        iosBlockTitle: 'iOS / iPadOS',
-        iosBlockCopy: '喜物收纳已在 App Store 正式上线，立即下载开始你的整理之旅。',
-        androidBlockTitle: 'Android',
-        androidBlockCopy: 'Google Play 上架进行中，想提前体验可申请 Android 封测版。',
-        statusLive: '✓ 已上线',
-        statusComing: '即将上线',
-        downloadNow: '立即下载',
-        getBeta: '申请 Android 测试',
-        backHome: '← 返回首页',
-        contact: '联系我们',
-      },
+        'lang-label': '中文',
+        'eyebrow': '应用已上线',
+        'title': '获取 喜物收纳',
+        'subtitle': '在移动设备上轻松收纳、记录前后对比并珍藏美好回忆。扫描二维码或点击按钮下载。',
+        'ios-badge': 'iOS / iPadOS',
+        'ios-title': '下载 iPhone 版',
+        'scan-ios-label': '扫码立即下载',
+        'ios-req': '需要 iOS 15.0 或更高版本。兼容 iPhone、iPad 和 iPod touch。',
+        'android-badge': 'Android',
+        'android-title': '下载 Android 版',
+        'scan-android-label': '扫码立即下载',
+        'android-req': '需要 Android 8.0 或更高版本。兼容绝大多数安卓智能手机。',
+        'footer-privacy': '隐私政策',
+        'footer-terms': '服务条款',
+        'footer-text': '为有意识的生活而生。',
+        'nav-contact': '联系我们',
+        'nav-download': '下载应用'
+      }
     };
 
-    let currentLang = localStorage.getItem('language') || 'en';
-    const iosCta = document.getElementById('iosCta');
-    const androidCta = document.getElementById('androidCta');
+    let currentLang = 'en';
 
-    function applyLanguage(lang) {
+    function setLanguage(lang) {
+      if (!lang) return;
       currentLang = lang;
+      updatePageLanguage();
       localStorage.setItem('language', lang);
-      document.documentElement.lang = lang;
-      document.querySelectorAll('[data-copy]').forEach(el => {
-        const key = el.getAttribute('data-copy');
-        const val = copy[lang][key];
-        if (typeof val === 'string') el.textContent = val;
-      });
-      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
-      iosCta.setAttribute('aria-label', copy[lang].iosCta);
-      androidCta.setAttribute('aria-label', copy[lang].androidCta);
     }
 
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
-    });
+    function updateLinksForLang(lang) {
+      const privacy = document.getElementById('footer-privacy');
+      const terms = document.getElementById('footer-terms');
+      if (privacy) privacy.href = (lang === 'zh') ? 'privacy_zh.html' : 'privacy.html';
+      if (terms) terms.href = (lang === 'zh') ? 'terms_zh.html' : 'terms.html';
+    }
 
-    applyLanguage(currentLang);
-    if (window.updateLinksForLang) window.updateLinksForLang(currentLang);
+    function updatePageLanguage() {
+      const t = translations[currentLang];
+      Object.keys(t).forEach(key => {
+        const el = document.getElementById(key);
+        if (el) el.textContent = t[key];
+      });
+      document.documentElement.lang = currentLang;
+      updateLinksForLang(currentLang);
+    }
+
+    // Wire up language switcher dropdown
+    (function(){
+      const langBtn = document.getElementById('langBtn');
+      const langMenu = document.getElementById('langMenu');
+      if(!langBtn || !langMenu) return;
+      
+      langBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const show = langMenu.classList.toggle('show');
+      });
+      
+      langMenu.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-lang]');
+        if(!btn) return;
+        const lang = btn.getAttribute('data-lang');
+        setLanguage(lang);
+      });
+      
+      document.addEventListener('click', (e) => {
+        if(!langMenu.classList.contains('show')) return;
+        if(!e.target.closest('.lang-dropdown')){
+          langMenu.classList.remove('show');
+        }
+      });
+    })();
+
+    // Copyright year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Load language preference
+    const savedLang = localStorage.getItem('language');
+    if (savedLang) {
+      currentLang = savedLang;
+      updatePageLanguage();
+    } else {
+      const userLang = navigator.language || navigator.userLanguage;
+      if (userLang && userLang.toLowerCase().startsWith('zh')) {
+        currentLang = 'zh';
+        updatePageLanguage();
+      }
+    }
   </script>
 </body>
 </html>
